@@ -2,7 +2,6 @@
 <project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
   xmlns="http://maven.apache.org/POM/4.0.0"
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
-    <artifactId>library</artifactId>
     <build>
         <plugins>
             <plugin>
@@ -19,9 +18,16 @@
             </plugin>
         </plugins>
     </build>
+    <artifactId>library</artifactId>
+
     <dependencies>
         <dependency>
             <artifactId>commons-internet</artifactId>
+            <groupId>cn.wsg.commons</groupId>
+            <version>${wsg.commons.version}</version>
+        </dependency>
+        <dependency>
+            <artifactId>commons-web</artifactId>
             <groupId>cn.wsg.commons</groupId>
             <version>${wsg.commons.version}</version>
         </dependency>
@@ -51,6 +57,12 @@
             <groupId>mysql</groupId>
             <scope>runtime</scope>
         </dependency>
+
+        <dependency>
+            <artifactId>commons-lang3</artifactId>
+            <groupId>org.apache.commons</groupId>
+        </dependency>
+
         <dependency>
             <artifactId>lombok</artifactId>
             <groupId>org.projectlombok</groupId>
@@ -71,7 +83,7 @@
         <artifactId>spring-boot-starter-parent</artifactId>
         <groupId>org.springframework.boot</groupId>
         <relativePath/>
-        <version>2.5.7</version> <!-- lookup parent from repository -->
+        <version>2.5.7</version>
     </parent>
 
     <properties>
@@ -81,5 +93,4 @@
     </properties>
 
     <version>0.0.1-SNAPSHOT</version>
-
 </project>

@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.wsg.library.dao.mapper.CategoryMapper">
+    <insert id="insert" parameterType="cn.wsg.library.entity.CategoryDO">
+        insert into lib_category (idx, title, super_idx, is_leaf)
+        values (#{idx}, #{title}, #{superIdx}, #{leaf})
+    </insert>
+    <resultMap id="BaseResultMap" type="cn.wsg.library.entity.CategoryDO">
+        <id column="idx" property="idx"/>
+        <result column="title" property="title"/>
+        <result column="super_idx" property="superIdx"/>
+        <result column="is_leaf" property="leaf"/>
+    </resultMap>
+
+    <select id="countAll" resultType="java.lang.Integer">
+        select count(*)
+        from lib_category
+    </select>
+
+    <select id="listBy" resultMap="BaseResultMap">
+        select idx, title, super_idx, is_leaf
+        from lib_category
+        <where>
+            <if test="idx != null and idx != ''">
+                and idx = #{idx}
+            </if>
+            <if test="superIdx != null and superIdx != ''">
+                and super_idx = #{superIdx}
+            </if>
+        </where>
+    </select>
+</mapper>

@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.wsg.library.dao.mapper.BookMapper">
+    <insert id="insert" parameterType="cn.wsg.library.entity.BookDO">
+        insert into lib_book
+        (isbn, title, original_title, cover, press, publish_date, category, description, content,
+         link, collect_status, read_status)
+        values (#{isbn}, #{title}, #{originalTitle}, #{cover}, #{press}, #{publishDate},
+                #{category}, #{description}, #{content}, #{link}, #{collectStatus}, #{readStatus})
+    </insert>
+
+    <resultMap id="BaseResultMap" type="cn.wsg.library.entity.BookDO">
+        <id column="isbn" property="isbn"/>
+        <result column="title" property="title"/>
+        <result column="original_title" property="originalTitle"/>
+        <result column="cover" property="cover"/>
+        <result column="press" property="press"/>
+        <result column="publish_date" property="publishDate"/>
+        <result column="category" property="category"/>
+        <result column="description" property="description"/>
+        <result column="content" property="content"/>
+        <result column="link" property="link"/>
+        <result column="collect_status" property="collectStatus"/>
+        <result column="read_status" property="readStatus"/>
+        <result column="gmt_modified" property="gmtModified"/>
+    </resultMap>
+
+    <resultMap id="BookDetails" type="cn.wsg.library.common.dto.BookDTO">
+        <id column="isbn" property="isbn"/>
+        <result column="title" property="title"/>
+        <result column="cover" property="cover"/>
+        <result column="press" property="press"/>
+        <result column="publish_date" property="publishDate"/>
+        <result column="category" property="category"/>
+        <result column="link" property="link"/>
+        <result column="read_status" property="readStatus"/>
+        <collection ofType="cn.wsg.library.common.dto.AuthorDTO" property="authors">
+            <id column="author_id" property="id"/>
+            <result column="author_name" property="name"/>
+        </collection>
+        <collection ofType="cn.wsg.library.common.dto.AuthorDTO" property="translators">
+            <id column="translator_id" property="id"/>
+            <result column="translator_name" property="name"/>
+        </collection>
+    </resultMap>
+
+    <select id="countByPrimaryKey" resultType="java.lang.Integer">
+        select count(*)
+        from lib_book
+        where isbn = #{isbn}
+    </select>
+
+    <select id="listBy" parameterType="cn.wsg.library.common.dto.QueryBookDTO"
+            resultMap="BookDetails">
+        select
+        b.isbn,
+        b.title,
+        b.cover,
+        b.press,
+        b.publish_date,
+        b.category,
+        b.link as link,
+        b.read_status,
+        if ( ba.work_type = 1, a.id, null ) as author_id,
+        if ( ba.work_type = 1, a.author_name, null ) as author_name,
+        if ( ba.work_type = 2, a.id, null ) as translator_id,
+        if ( ba.work_type = 2, a.author_name, null ) as translator_name
+        from lib_book b, lib_book_author ba, lib_author a
+        where b.isbn = ba.book_isbn
+        and ba.author_id = a.id
+        <if test="title != null and title != ''">
+            and b.title like concat('%',#{title},'%')
+        </if>
+        <if test="category != null and category != ''">
+            and substr(b.category, 0, length(#{category})) = #{category}
+        </if>
+        <if test="author != null and author != ''">
+            and a.author_name like concat('%',#{author},'%')
+        </if>
+    </select>
+
+    <update id="updateReadStatus">
+        update lib_book
+        set read_status = #{status}
+        where isbn = #{isbn}
+    </update>
+</mapper>

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.wsg.library.dao.mapper.BookAuthorMapper">
+    <insert id="insert" keyColumn="id"
+            keyProperty="id" parameterType="cn.wsg.library.entity.BookAuthorDO" useGeneratedKeys="true">
+        insert into lib_book_author(book_isbn, author_id, work_type)
+        values (#{bookIsbn}, #{authorId}, #{workType})
+    </insert>
+
+    <resultMap id="BaseResultMap" type="cn.wsg.library.entity.BookAuthorDO">
+        <id column="id" property="id"/>
+        <result column="book_isbn" property="bookIsbn"/>
+        <result column="author_id" property="authorId"/>
+        <result column="work_type" property="workType"/>
+    </resultMap>
+</mapper>
