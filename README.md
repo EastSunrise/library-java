@@ -1,3 +1,3 @@
 #### Overview
 
-This project is a library management system.
+This project is a repository including various resources.

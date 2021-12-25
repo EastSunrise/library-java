@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="cn.wsg.library.dao.mapper.BookMapper">
-    <insert id="insert" parameterType="cn.wsg.library.entity.BookDO">
+<mapper namespace="cn.wsg.repository.dao.mapper.BookMapper">
+    <insert id="insert" parameterType="cn.wsg.repository.entity.BookDO">
         insert into lib_book
         (isbn, title, original_title, cover, press, publish_date, category, description, content,
          link, collect_status, read_status)
@@ -10,7 +10,7 @@
                 #{category}, #{description}, #{content}, #{link}, #{collectStatus}, #{readStatus})
     </insert>
 
-    <resultMap id="BaseResultMap" type="cn.wsg.library.entity.BookDO">
+    <resultMap id="BaseResultMap" type="cn.wsg.repository.entity.BookDO">
         <id column="isbn" property="isbn"/>
         <result column="title" property="title"/>
         <result column="original_title" property="originalTitle"/>
@@ -26,7 +26,7 @@
         <result column="gmt_modified" property="gmtModified"/>
     </resultMap>
 
-    <resultMap id="BookDetails" type="cn.wsg.library.common.dto.BookDTO">
+    <resultMap id="BookDetails" type="cn.wsg.repository.common.dto.BookDTO">
         <id column="isbn" property="isbn"/>
         <result column="title" property="title"/>
         <result column="cover" property="cover"/>
@@ -35,11 +35,11 @@
         <result column="category" property="category"/>
         <result column="link" property="link"/>
         <result column="read_status" property="readStatus"/>
-        <collection ofType="cn.wsg.library.common.dto.AuthorDTO" property="authors">
+        <collection ofType="cn.wsg.repository.common.dto.AuthorDTO" property="authors">
             <id column="author_id" property="id"/>
             <result column="author_name" property="name"/>
         </collection>
-        <collection ofType="cn.wsg.library.common.dto.AuthorDTO" property="translators">
+        <collection ofType="cn.wsg.repository.common.dto.AuthorDTO" property="translators">
             <id column="translator_id" property="id"/>
             <result column="translator_name" property="name"/>
         </collection>
@@ -51,8 +51,8 @@
         where isbn = #{isbn}
     </select>
 
-    <select id="listBy" parameterType="cn.wsg.library.common.dto.QueryBookDTO"
-            resultMap="BookDetails">
+    <select id="listBy" parameterType="cn.wsg.repository.common.dto.QueryBookDTO"
+      resultMap="BookDetails">
         select
         b.isbn,
         b.title,

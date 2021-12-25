@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="cn.wsg.library.dao.mapper.CategoryMapper">
-    <insert id="insert" parameterType="cn.wsg.library.entity.CategoryDO">
+<mapper namespace="cn.wsg.repository.dao.mapper.CategoryMapper">
+    <insert id="insert" parameterType="cn.wsg.repository.entity.CategoryDO">
         insert into lib_category (idx, title, super_idx, is_leaf)
         values (#{idx}, #{title}, #{superIdx}, #{leaf})
     </insert>
-    <resultMap id="BaseResultMap" type="cn.wsg.library.entity.CategoryDO">
+    <resultMap id="BaseResultMap" type="cn.wsg.repository.entity.CategoryDO">
         <id column="idx" property="idx"/>
         <result column="title" property="title"/>
         <result column="super_idx" property="superIdx"/>
