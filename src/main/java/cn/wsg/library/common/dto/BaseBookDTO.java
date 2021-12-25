@@ -1,10 +1,8 @@
 package cn.wsg.library.common.dto;
 
-import cn.wsg.commons.lang.enums.Language;
+import java.time.LocalDate;
 import lombok.Getter;
 import lombok.ToString;
-
-import java.time.LocalDate;
 
 /**
  * Base properties of a book.
@@ -28,8 +26,6 @@ public class BaseBookDTO {
     private LocalDate publishDate;
 
     private String category;
-
-    private Language language;
 
     private String description;
 
