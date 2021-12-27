@@ -1,6 +1,6 @@
-package cn.wsg.repository.dao.mapper;
+package cn.wsg.repository.dao.mapper.lib;
 
-import cn.wsg.repository.entity.CategoryDO;
+import cn.wsg.repository.entity.lib.CategoryDO;
 import java.util.List;
 import org.apache.ibatis.annotations.Mapper;
 

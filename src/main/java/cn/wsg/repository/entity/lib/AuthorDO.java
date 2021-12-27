@@ -1,4 +1,4 @@
-package cn.wsg.repository.entity;
+package cn.wsg.repository.entity.lib;
 
 import cn.wsg.commons.lang.Region;
 import java.io.Serializable;

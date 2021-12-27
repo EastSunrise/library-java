@@ -1,24 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
-        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="cn.wsg.repository.dao.mapper.CategoryMapper">
-    <insert id="insert" parameterType="cn.wsg.repository.entity.CategoryDO">
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.wsg.repository.dao.mapper.lib.CategoryMapper">
+    <insert id="insert" parameterType="cn.wsg.repository.entity.lib.CategoryDO">
         insert into lib_category (idx, title, super_idx, is_leaf)
         values (#{idx}, #{title}, #{superIdx}, #{leaf})
     </insert>
-    <resultMap id="BaseResultMap" type="cn.wsg.repository.entity.CategoryDO">
-        <id column="idx" property="idx"/>
-        <result column="title" property="title"/>
-        <result column="super_idx" property="superIdx"/>
-        <result column="is_leaf" property="leaf"/>
-    </resultMap>
 
     <select id="countAll" resultType="java.lang.Integer">
         select count(*)
         from lib_category
     </select>
 
-    <select id="listBy" resultMap="BaseResultMap">
+    <resultMap id="CategoryMap" type="cn.wsg.repository.entity.lib.CategoryDO">
+        <id column="idx" jdbcType="VARCHAR" property="idx"/>
+        <result column="title" jdbcType="VARCHAR" property="title"/>
+        <result column="super_idx" jdbcType="VARCHAR" property="superIdx"/>
+        <result column="is_leaf" jdbcType="TINYINT" property="leaf"/>
+    </resultMap>
+
+    <select id="listBy" resultMap="CategoryMap">
         select idx, title, super_idx, is_leaf
         from lib_category
         <where>

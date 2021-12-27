@@ -1,21 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
-        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="cn.wsg.repository.dao.mapper.AuthorMapper">
-    <insert id="insert" keyColumn="id"
-      keyProperty="id" parameterType="cn.wsg.repository.entity.AuthorDO" useGeneratedKeys="true">
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.wsg.repository.dao.mapper.lib.AuthorMapper">
+    <insert id="insert" keyColumn="id" keyProperty="id"
+      parameterType="cn.wsg.repository.entity.lib.AuthorDO"
+      useGeneratedKeys="true">
         insert into lib_author (author_name, original_name, region, link)
         values (#{name}, #{originalName}, #{region}, #{link})
     </insert>
-
-    <resultMap id="BaseResultMap" type="cn.wsg.repository.entity.AuthorDO">
-        <id column="id" property="id"/>
-        <result column="author_name" property="name"/>
-        <result column="original_name" property="originalName"/>
-        <result column="region" property="region"/>
-        <result column="link" property="link"/>
-        <result column="gmt_modified" property="gmtModified"/>
-    </resultMap>
 
     <select id="countByName" resultType="java.lang.Integer">
         select count(*)
@@ -23,7 +15,16 @@
         where author_name = #{name}
     </select>
 
-    <select id="listByName" resultMap="BaseResultMap">
+    <resultMap id="AuthorMap" type="cn.wsg.repository.entity.lib.AuthorDO">
+        <id column="id" jdbcType="BIGINT" property="id"/>
+        <result column="author_name" jdbcType="VARCHAR" property="name"/>
+        <result column="original_name" jdbcType="VARCHAR" property="originalName"/>
+        <result column="region" jdbcType="CHAR" property="region"/>
+        <result column="link" jdbcType="VARCHAR" property="link"/>
+        <result column="gmt_modified" jdbcType="TIMESTAMP" property="gmtModified"/>
+    </resultMap>
+
+    <select id="listByName" resultMap="AuthorMap">
         select
         id, author_name, original_name, region, link, gmt_modified
         from lib_author

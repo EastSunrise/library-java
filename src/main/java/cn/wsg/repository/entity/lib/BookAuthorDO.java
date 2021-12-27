@@ -1,4 +1,4 @@
-package cn.wsg.repository.entity;
+package cn.wsg.repository.entity.lib;
 
 import cn.wsg.repository.common.enums.WorkType;
 import java.io.Serializable;

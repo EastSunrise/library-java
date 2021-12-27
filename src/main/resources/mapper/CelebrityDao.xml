@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.wsg.repository.dao.mapper.video.CelebrityDao">
+    <resultMap id="CelebrityMap" type="cn.wsg.repository.entity.video.CelebrityDO">
+        <id column="id" jdbcType="BIGINT" property="id"/>
+        <result column="douban_id" jdbcType="BIGINT" property="doubanId"/>
+        <result column="imdb_id" jdbcType="CHAR" property="imdbId"/>
+        <result column="zh_name" jdbcType="VARCHAR" property="zhName"/>
+        <result column="original_name" jdbcType="VARCHAR" property="originalName"/>
+        <result column="en_name" jdbcType="VARCHAR" property="enName"/>
+        <result column="gender" jdbcType="TINYINT" property="gender"/>
+        <result column="profile" jdbcType="VARCHAR" property="profile"/>
+        <result column="birthday" jdbcType="DATE" property="birthday"/>
+        <result column="region" jdbcType="CHAR" property="region"/>
+        <result column="gmt_modified" jdbcType="TIMESTAMP" property="gmtModified"/>
+    </resultMap>
+</mapper>

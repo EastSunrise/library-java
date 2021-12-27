@@ -1,4 +1,4 @@
-package cn.wsg.repository.entity;
+package cn.wsg.repository.entity.lib;
 
 import java.io.Serializable;
 import lombok.AllArgsConstructor;

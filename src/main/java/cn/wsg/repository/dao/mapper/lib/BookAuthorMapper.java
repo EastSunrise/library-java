@@ -1,6 +1,6 @@
-package cn.wsg.repository.dao.mapper;
+package cn.wsg.repository.dao.mapper.lib;
 
-import cn.wsg.repository.entity.BookAuthorDO;
+import cn.wsg.repository.entity.lib.BookAuthorDO;
 import org.apache.ibatis.annotations.Mapper;
 
 /**

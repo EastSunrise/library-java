@@ -6,15 +6,13 @@ import cn.wsg.commons.web.Displayable;
 /**
  * @author Kingen
  */
-public enum ReadStatus implements IntCodeSupplier, Displayable {
-
-    WISH(0, "想读"), READING(1, "在读"), DONE(2, "已读");
+public enum Genre implements IntCodeSupplier, Displayable {
+    ;
 
     private final int code;
-
     private final String displayName;
 
-    ReadStatus(int code, String displayName) {
+    Genre(int code, String displayName) {
         this.code = code;
         this.displayName = displayName;
     }

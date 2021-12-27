@@ -1,8 +1,8 @@
 package cn.wsg.repository.service;
 
 import cn.wsg.repository.common.dto.AuthorDTO;
-import cn.wsg.repository.dao.mapper.AuthorMapper;
-import cn.wsg.repository.entity.AuthorDO;
+import cn.wsg.repository.dao.mapper.lib.AuthorMapper;
+import cn.wsg.repository.entity.lib.AuthorDO;
 import java.util.List;
 import java.util.stream.Collectors;
 import org.springframework.beans.BeanUtils;

@@ -1,7 +1,7 @@
 package cn.wsg.repository.service;
 
 import cn.wsg.repository.common.dto.CategoryDTO;
-import cn.wsg.repository.dao.mapper.CategoryMapper;
+import cn.wsg.repository.dao.mapper.lib.CategoryMapper;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
