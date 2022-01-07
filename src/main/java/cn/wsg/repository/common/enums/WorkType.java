@@ -1,33 +1,30 @@
 package cn.wsg.repository.common.enums;
 
-import cn.wsg.commons.lang.function.IntCodeSupplier;
-import cn.wsg.commons.web.Displayable;
+import cn.wsg.commons.web.BilingualDisplayable;
 
 /**
  * @author Kingen
  */
-public enum WorkType implements IntCodeSupplier, Displayable {
-    /**
-     * As the author or the translator
-     */
-    AUTHOR(1, "作者"), TRANSLATOR(2, "译者");
+public enum WorkType implements BilingualDisplayable {
 
-    private final int code;
+    AU("Author", "作者"),
+    TR("Translator", "译者");
 
-    private final String displayName;
+    private final String enName;
+    private final String zhName;
 
-    WorkType(int code, String displayName) {
-        this.code = code;
-        this.displayName = displayName;
+    WorkType(String enName, String zhName) {
+        this.enName = enName;
+        this.zhName = zhName;
     }
 
     @Override
-    public int getIntCode() {
-        return code;
+    public String getZhDisplayName() {
+        return zhName;
     }
 
     @Override
-    public String getDisplayName() {
-        return displayName;
+    public String getEnDisplayName() {
+        return enName;
     }
 }

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.wsg.repository.dao.mapper.video.VideoIdRelationMapper">
+    <resultMap id="VideoIdRelationMap" type="cn.wsg.repository.entity.video.VideoIdRelationDO">
+        <result property="doubanId" column="douban_id" jdbcType="BIGINT"/>
+        <result property="imdbId" column="imdb_id" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <insert id="insertIgnore" parameterType="cn.wsg.repository.entity.video.VideoIdRelationDO">
+        insert ignore into repository.video_id_relation (douban_id, imdb_id)
+        values (#{doubanId}, #{imdbId})
+    </insert>
+
+    <select id="getDoubanIdByImdbId" resultMap="VideoIdRelationMap">
+        select douban_id, imdb_id
+        from repository.video_id_relation
+        where imdb_id = #{imdbId}
+    </select>
+</mapper>

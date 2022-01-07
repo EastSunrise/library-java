@@ -1,31 +1,31 @@
 package cn.wsg.repository.common.enums;
 
-import cn.wsg.commons.lang.function.IntCodeSupplier;
-import cn.wsg.commons.web.Displayable;
+import cn.wsg.commons.web.BilingualDisplayable;
 
 /**
  * @author Kingen
  */
-public enum ReadStatus implements IntCodeSupplier, Displayable {
+public enum ReadStatus implements BilingualDisplayable {
 
-    WISH(0, "想读"), READING(1, "在读"), DONE(2, "已读");
+    WI("Wish", "想读"),
+    RE("Reading", "在读"),
+    DO("DONE", "已读");
 
-    private final int code;
+    private final String enName;
+    private final String zhName;
 
-    private final String displayName;
-
-    ReadStatus(int code, String displayName) {
-        this.code = code;
-        this.displayName = displayName;
+    ReadStatus(String enName, String zhName) {
+        this.enName = enName;
+        this.zhName = zhName;
     }
 
     @Override
-    public int getIntCode() {
-        return code;
+    public String getZhDisplayName() {
+        return zhName;
     }
 
     @Override
-    public String getDisplayName() {
-        return displayName;
+    public String getEnDisplayName() {
+        return enName;
     }
 }

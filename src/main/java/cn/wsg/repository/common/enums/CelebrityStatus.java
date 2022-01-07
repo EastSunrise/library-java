@@ -1,32 +1,31 @@
 package cn.wsg.repository.common.enums;
 
-import cn.wsg.commons.lang.function.IntCodeSupplier;
-import cn.wsg.commons.web.Displayable;
+import cn.wsg.commons.web.BilingualDisplayable;
 
 /**
  * @author Kingen
  */
-public enum CelebrityStatus implements IntCodeSupplier, Displayable {
+public enum CelebrityStatus implements BilingualDisplayable {
 
-    DIRECTOR(1, "导演"),
-    WRITER(2, "编剧"),
-    ACTOR(3, "演员");
+    DI("Director", "导演"),
+    WR("Writer", "编剧"),
+    AC("Actor", "演员");
 
-    private final int code;
-    private final String displayName;
+    private final String enName;
+    private final String zhName;
 
-    CelebrityStatus(int code, String displayName) {
-        this.code = code;
-        this.displayName = displayName;
+    CelebrityStatus(String enName, String zhName) {
+        this.enName = enName;
+        this.zhName = zhName;
     }
 
     @Override
-    public int getIntCode() {
-        return code;
+    public String getZhDisplayName() {
+        return zhName;
     }
 
     @Override
-    public String getDisplayName() {
-        return displayName;
+    public String getEnDisplayName() {
+        return enName;
     }
 }

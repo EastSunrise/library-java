@@ -1,14 +1,17 @@
 package cn.wsg.repository.entity.video;
 
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
+
 import java.io.Serializable;
 import java.time.LocalDateTime;
-import lombok.Getter;
-import lombok.ToString;
 
 /**
  * @author Kingen
  */
 @Getter
+@Setter
 @ToString
 public class SeasonDO extends BaseVideoInfo implements Serializable {
 
@@ -16,13 +19,13 @@ public class SeasonDO extends BaseVideoInfo implements Serializable {
 
     private Long id;
 
-    private Long doubanId;
-
-    private String imdbId;
+    private Long seriesId;
 
     private Integer currentSeason;
 
     private Integer episodesCount;
+
+    private Long doubanId;
 
     @ToString.Exclude
     private LocalDateTime gmtModified;

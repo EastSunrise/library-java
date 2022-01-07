@@ -1,10 +1,12 @@
 package cn.wsg.repository.entity.video;
 
+import cn.wsg.commons.internet.common.MovieGenre;
 import cn.wsg.commons.lang.Language;
 import cn.wsg.commons.lang.Region;
-import cn.wsg.repository.common.enums.Genre;
-import java.time.LocalDate;
 import lombok.Getter;
+import lombok.Setter;
+
+import java.time.LocalDate;
 
 /**
  * Base information of videos.
@@ -12,27 +14,22 @@ import lombok.Getter;
  * @author Kingen
  */
 @Getter
-public class BaseVideoInfo {
+@Setter
+class BaseVideoInfo {
 
     private String zhTitle;
 
     private String originalTitle;
 
-    private String enTitle;
-
     private String[] otherTitles;
 
-    private String cover;
-
-    private Genre[] genres;
+    private MovieGenre[] genres;
 
     private Region[] regions;
 
     private Language[] languages;
 
     private LocalDate releaseDate;
-
-    private int[] runtimes;
 
     private String description;
 }

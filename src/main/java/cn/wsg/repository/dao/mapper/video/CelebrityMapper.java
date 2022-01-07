@@ -6,6 +6,6 @@ import org.apache.ibatis.annotations.Mapper;
  * @author Kingen
  */
 @Mapper
-public interface MovieDao {
+public interface CelebrityMapper {
 
 }

@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.wsg.repository.dao.mapper.video.SeasonMapper">
+    <resultMap id="SeasonMap" type="cn.wsg.repository.entity.video.SeasonDO">
+        <result column="id" jdbcType="BIGINT" property="id"/>
+        <result column="series_id" jdbcType="BIGINT" property="seriesId"/>
+        <result column="current_season" jdbcType="TINYINT" property="currentSeason"/>
+        <result column="episodes_count" jdbcType="TINYINT" property="episodesCount"/>
+        <result column="douban_id" jdbcType="BIGINT" property="doubanId"/>
+        <result column="zh_title" jdbcType="VARCHAR" property="zhTitle"/>
+        <result column="original_title" jdbcType="VARCHAR" property="originalTitle"/>
+        <result column="other_titles" jdbcType="VARCHAR" property="otherTitles"/>
+        <result column="genres" jdbcType="VARCHAR" property="genres"/>
+        <result column="regions" jdbcType="VARCHAR" property="regions"/>
+        <result column="languages" jdbcType="VARCHAR" property="languages"/>
+        <result column="release_date" jdbcType="TIMESTAMP" property="releaseDate"/>
+        <result column="description" jdbcType="VARCHAR" property="description"/>
+        <result column="gmt_modified" jdbcType="TIMESTAMP" property="gmtModified"/>
+    </resultMap>
+
+    <select id="selectByDoubanId" resultMap="SeasonMap">
+        select id,
+               series_id,
+               current_season,
+               episodes_count,
+               douban_id,
+               zh_title,
+               original_title,
+               other_titles,
+               genres,
+               regions,
+               languages,
+               release_date,
+               description,
+               gmt_modified
+        from repository.video_season
+        where douban_id = #{doubanId}
+    </select>
+
+    <insert id="insert" keyColumn="id" keyProperty="id" useGeneratedKeys="true"
+            parameterType="cn.wsg.repository.entity.video.SeasonDO">
+        insert into repository.video_season
+        (series_id, current_season, episodes_count, douban_id, zh_title, original_title, other_titles, genres,
+         regions, languages, release_date, description)
+        values (#{seriesId}, #{currentSeason}, #{episodesCount}, #{doubanId}, #{zhTitle}, #{originalTitle},
+                #{otherTitles}, #{genres}, #{regions}, #{languages}, #{releaseDate}, #{description})
+    </insert>
+</mapper>
