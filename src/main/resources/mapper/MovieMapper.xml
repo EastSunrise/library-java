@@ -2,6 +2,27 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="cn.wsg.repository.dao.mapper.video.MovieMapper">
+    <insert id="insert" keyColumn="id" keyProperty="id" useGeneratedKeys="true"
+            parameterType="cn.wsg.repository.entity.video.MovieDO">
+        insert into repository.video_movie
+        (douban_id, imdb_id, zh_title, original_title, en_title, other_titles, genres, regions,
+         languages, release_date, runtimes, description)
+        VALUES (#{doubanId}, #{imdbId}, #{zhTitle}, #{originalTitle}, #{enTitle}, #{otherTitles},
+                #{genres}, #{regions}, #{languages}, #{releaseDate}, #{runtimes}, #{description})
+    </insert>
+
+    <select id="countBy" resultType="java.lang.Integer">
+        select count(*) from repository.video_movie T
+        <where>
+            <if test="doubanId != null">
+                T.douban_id = #{doubanId}
+            </if>
+            <if test="imdbId != null and imdbId != ''">
+                AND T.imdb_id = #{imdbId}
+            </if>
+        </where>
+    </select>
+
     <resultMap id="MovieMap" type="cn.wsg.repository.entity.video.MovieDO">
         <result column="id" jdbcType="INTEGER" property="id"/>
         <result column="douban_id" jdbcType="INTEGER" property="doubanId"/>
@@ -18,15 +39,6 @@
         <result column="description" jdbcType="VARCHAR" property="description"/>
         <result column="gmt_modified" jdbcType="TIMESTAMP" property="gmtModified"/>
     </resultMap>
-
-    <insert id="insert" keyColumn="id" keyProperty="id" useGeneratedKeys="true"
-            parameterType="cn.wsg.repository.entity.video.MovieDO">
-        insert into repository.video_movie
-        (douban_id, imdb_id, zh_title, original_title, en_title, other_titles, genres, regions,
-         languages, release_date, runtimes, description)
-        VALUES (#{doubanId}, #{imdbId}, #{zhTitle}, #{originalTitle}, #{enTitle}, #{otherTitles},
-                #{genres}, #{regions}, #{languages}, #{releaseDate}, #{runtimes}, #{description})
-    </insert>
 
     <select id="selectByImdbId" resultMap="MovieMap">
         select id,

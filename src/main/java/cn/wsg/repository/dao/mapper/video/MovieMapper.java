@@ -1,5 +1,6 @@
 package cn.wsg.repository.dao.mapper.video;
 
+import cn.wsg.repository.common.dto.QueryVideoDTO;
 import cn.wsg.repository.entity.video.MovieDO;
 import org.apache.ibatis.annotations.Mapper;
 
@@ -17,6 +18,14 @@ public interface MovieMapper {
      * @return 1 if successes, 0 otherwise
      */
     int insert(MovieDO movieDO);
+
+    /**
+     * Counts eligible movies.
+     *
+     * @param cond condition to count by
+     * @return the number of eligible movies
+     */
+    int countBy(QueryVideoDTO cond);
 
     /**
      * Queries the movie of the specified IMDb id.

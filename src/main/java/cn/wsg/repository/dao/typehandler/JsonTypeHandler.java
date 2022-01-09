@@ -3,11 +3,9 @@ package cn.wsg.repository.dao.typehandler;
 import cn.wsg.commons.internet.common.MovieGenre;
 import cn.wsg.commons.lang.Language;
 import cn.wsg.commons.lang.Region;
-import cn.wsg.commons.lang.jackson.EnumDeserializers;
-import cn.wsg.commons.lang.jackson.EnumSerializers;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.module.SimpleModule;
+import com.fasterxml.jackson.databind.SerializationFeature;
 import org.apache.ibatis.type.BaseTypeHandler;
 import org.apache.ibatis.type.JdbcType;
 import org.apache.ibatis.type.MappedJdbcTypes;
@@ -28,9 +26,7 @@ import java.util.Objects;
 @MappedTypes(value = {String[].class, MovieGenre[].class, Region[].class, Language[].class, int[].class})
 public class JsonTypeHandler<T> extends BaseTypeHandler<T> {
 
-    private static final ObjectMapper MAPPER = new ObjectMapper().registerModule(
-        new SimpleModule().addSerializer(EnumSerializers.asInteger(MovieGenre.class, MovieGenre::ordinal))
-            .addDeserializer(MovieGenre.class, EnumDeserializers.ofIntegerKey(MovieGenre.class, MovieGenre::ordinal)));
+    private static final ObjectMapper MAPPER = new ObjectMapper().enable(SerializationFeature.WRITE_ENUMS_USING_INDEX);
 
     private final Class<T> clazz;
 

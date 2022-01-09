@@ -2,6 +2,25 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="cn.wsg.repository.dao.mapper.video.SeriesMapper">
+    <insert id="insert" keyColumn="id" keyProperty="id" useGeneratedKeys="true"
+            parameterType="cn.wsg.repository.entity.video.SeriesDO">
+        insert into repository.video_series
+            (imdb_id, zh_title, original_title, en_title, other_titles)
+        values (#{imdbId}, #{zhTitle}, #{originalTitle}, #{enTitle}, #{otherTitles})
+    </insert>
+
+    <select id="countBy" resultType="java.lang.Integer">
+        select count(*) from repository.video_series T
+        <where>
+            <if test="imdbId != null and imdbId != ''">
+                T.imdb_id = #{imdbId}
+            </if>
+            <if test="doubanId != null">
+                AND 1=0
+            </if>
+        </where>
+    </select>
+
     <resultMap id="SeriesMap" type="cn.wsg.repository.entity.video.SeriesDO">
         <result column="id" jdbcType="INTEGER" property="id"/>
         <result column="imdb_id" jdbcType="VARCHAR" property="imdbId"/>
@@ -17,12 +36,4 @@
         from repository.video_series
         where imdb_id = #{imdbId}
     </select>
-
-    <insert id="insert" keyColumn="id" keyProperty="id" useGeneratedKeys="true"
-            parameterType="cn.wsg.repository.entity.video.SeriesDO">
-        insert into repository.video_series
-            (imdb_id, zh_title, original_title, en_title, other_titles)
-        values (#{imdbId}, #{zhTitle}, #{originalTitle}, #{enTitle}, #{otherTitles})
-    </insert>
-
 </mapper>

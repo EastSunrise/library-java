@@ -5,7 +5,6 @@ import cn.wsg.commons.internet.page.Page;
 import cn.wsg.commons.internet.page.PageIndex;
 import cn.wsg.commons.internet.support.LoginException;
 import cn.wsg.commons.internet.support.NotFoundException;
-import cn.wsg.commons.internet.support.OtherResponseException;
 import cn.wsg.repository.dao.mapper.video.VideoIdRelationMapper;
 import cn.wsg.repository.entity.video.VideoIdRelationDO;
 import org.springframework.beans.factory.DisposableBean;
@@ -31,7 +30,7 @@ public class DoubanRepoAdapter implements DoubanRepository, DisposableBean {
     }
 
     @Override
-    public DoubanVideo findVideoById(long id) throws NotFoundException, OtherResponseException {
+    public DoubanVideo findVideoById(long id) throws NotFoundException {
         DoubanVideo video = repository.findVideoById(id);
         if (video.getImdbId() != null) {
             saveIdRelation(id, video.getImdbId());
@@ -40,7 +39,7 @@ public class DoubanRepoAdapter implements DoubanRepository, DisposableBean {
     }
 
     @Override
-    public long getDbIdByImdbId(String imdbId) throws NotFoundException, OtherResponseException, LoginException {
+    public long getDbIdByImdbId(String imdbId) throws NotFoundException, LoginException {
         VideoIdRelationDO relationDO = relationMapper.getDoubanIdByImdbId(imdbId);
         if (relationDO != null) {
             return relationDO.getDoubanId();
@@ -54,43 +53,45 @@ public class DoubanRepoAdapter implements DoubanRepository, DisposableBean {
     }
 
     @Override
-    public void login(String username, String password) throws OtherResponseException, LoginException {
+    public void login(String username, String password) throws LoginException {
         repository.login(username, password);
     }
 
     @Override
-    public void logout() throws OtherResponseException {
+    public void logout() {
         repository.logout();
     }
 
     @Override
-    public Page<SubjectIndex> searchGlobally(String keyword, PageIndex page, DoubanCatalog catalog) throws OtherResponseException {
+    public Page<SubjectIndex> searchGlobally(String keyword, PageIndex page, DoubanCatalog catalog)
+        throws SearchException {
         return repository.searchGlobally(keyword, page, catalog);
     }
 
     @Override
-    public List<SubjectIndex> search(DoubanCatalog catalog, String keyword) throws OtherResponseException {
+    public List<SubjectIndex> search(DoubanCatalog catalog, String keyword) {
         return repository.search(catalog, keyword);
     }
 
     @Override
-    public Page<RankedSubject> top250(PageIndex pageIndex) throws OtherResponseException {
+    public Page<RankedSubject> top250(PageIndex pageIndex) {
         return repository.top250(pageIndex);
     }
 
     @Override
     public Page<MarkedSubject> findUserSubjects(DoubanCatalog catalog, long userId, MarkedStatus status, PageIndex page)
-        throws NotFoundException, OtherResponseException {
+        throws NotFoundException {
         return repository.findUserSubjects(catalog, userId, status, page);
     }
 
     @Override
-    public Page<PersonIndex> findUserCreators(DoubanCatalog catalog, long userId, PageIndex page) throws NotFoundException, OtherResponseException {
+    public Page<PersonIndex> findUserCreators(DoubanCatalog catalog, long userId, PageIndex page)
+        throws NotFoundException {
         return repository.findUserCreators(catalog, userId, page);
     }
 
     @Override
-    public DoubanBook findBookById(long id) throws NotFoundException, OtherResponseException {
+    public DoubanBook findBookById(long id) throws NotFoundException {
         return repository.findBookById(id);
     }
 

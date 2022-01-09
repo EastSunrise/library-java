@@ -8,11 +8,11 @@ import cn.wsg.commons.internet.com.imdb.*;
 import cn.wsg.commons.internet.common.MovieGenre;
 import cn.wsg.commons.internet.support.LoginException;
 import cn.wsg.commons.internet.support.NotFoundException;
-import cn.wsg.commons.internet.support.OtherResponseException;
 import cn.wsg.commons.internet.support.UnexpectedException;
 import cn.wsg.commons.lang.CollectionUtilsExt;
 import cn.wsg.commons.lang.Language;
 import cn.wsg.commons.lang.Region;
+import cn.wsg.repository.common.dto.QueryVideoDTO;
 import cn.wsg.repository.common.error.DataIntegrityException;
 import cn.wsg.repository.dao.mapper.video.MovieMapper;
 import cn.wsg.repository.dao.mapper.video.SeasonMapper;
@@ -42,8 +42,8 @@ public class VideoServiceImpl implements VideoService {
     private final SeasonMapper seasonMapper;
 
     @Autowired
-    public VideoServiceImpl(DoubanRepository doubanRepo, ImdbRepository imdbRepo, MovieMapper movieMapper, SeriesMapper seriesMapper,
-        SeasonMapper seasonMapper) {
+    public VideoServiceImpl(DoubanRepository doubanRepo, ImdbRepository imdbRepo, MovieMapper movieMapper,
+        SeriesMapper seriesMapper, SeasonMapper seasonMapper) {
         this.doubanRepo = doubanRepo;
         this.imdbRepo = imdbRepo;
         this.movieMapper = movieMapper;
@@ -52,7 +52,34 @@ public class VideoServiceImpl implements VideoService {
     }
 
     @Override
-    public long importVideoFromImdb(String imdbId) throws DataIntegrityException, OtherResponseException, NotFoundException {
+    public int countVideoBy(QueryVideoDTO cond) {
+        return movieMapper.countBy(cond) + seriesMapper.countBy(cond) + seasonMapper.countBy(cond);
+    }
+
+    @Override
+    public long importVideoFromDouban(long doubanId, DoubanVideo video) throws DataIntegrityException {
+        Optional<Long> optional = checkDouban(doubanId);
+        if (optional.isPresent()) {
+            return optional.get();
+        }
+
+        log.info("Importing a subject from Douban Plugin: {}", doubanId);
+        return importVideo(doubanId, video);
+    }
+
+    @Override
+    public long importVideoFromDouban(long doubanId) throws DataIntegrityException, NotFoundException {
+        Optional<Long> optional = checkDouban(doubanId);
+        if (optional.isPresent()) {
+            return optional.get();
+        }
+        log.info("Importing a subject from Douban: {}", doubanId);
+        DoubanVideo video = doubanRepo.findVideoById(doubanId);
+        return importVideo(doubanId, video);
+    }
+
+    @Override
+    public long importVideoFromImdb(String imdbId) throws DataIntegrityException, NotFoundException {
         MovieDO movie = movieMapper.selectByImdbId(imdbId);
         if (movie != null) {
             return movie.getId();
@@ -81,19 +108,16 @@ public class VideoServiceImpl implements VideoService {
         throw new DataIntegrityException("Unexpected type to be imported: " + imdbTitle.getClass().getName());
     }
 
-    @Override
-    public long importVideoFromDouban(long doubanId) throws OtherResponseException, DataIntegrityException, NotFoundException {
+    private Optional<Long> checkDouban(long doubanId) {
         MovieDO movie = movieMapper.selectByDoubanId(doubanId);
         if (movie != null) {
-            return movie.getId();
+            return Optional.of(movie.getId());
         }
-        SeasonDO exists = seasonMapper.selectByDoubanId(doubanId);
-        if (exists != null) {
-            return exists.getId();
-        }
+        SeasonDO season = seasonMapper.selectByDoubanId(doubanId);
+        return Optional.ofNullable(season).map(SeasonDO::getId);
+    }
 
-        log.info("Importing a subject from Douban: {}", doubanId);
-        DoubanVideo video = doubanRepo.findVideoById(doubanId);
+    private long importVideo(long doubanId, DoubanVideo video) throws DataIntegrityException {
         String imdbId = video.getImdbId();
         if (imdbId == null) {
             throw new DataIntegrityException("Can't import the subject without IMDb id.");
@@ -116,7 +140,7 @@ public class VideoServiceImpl implements VideoService {
     }
 
     private long insertSeason(long doubanId, DoubanTVSeries doubanSeries, String imdbId, ImdbCreativeWork imdbTitle)
-        throws OtherResponseException, DataIntegrityException {
+        throws DataIntegrityException {
         SeasonDO season = new SeasonDO();
         String seriesImdbId;
         if (imdbTitle instanceof ImdbTVSeries) {
@@ -138,10 +162,12 @@ public class VideoServiceImpl implements VideoService {
             }
             season.setCurrentSeason(((ImdbEpisode)imdbTitle).getEpisodeNumber().getSeason());
         } else {
-            throw new DataIntegrityException(String.format("Conflict type: ImdbTVSeries or ImdbEpisode expected but %s provided.", imdbTitle.getClass()));
+            throw new DataIntegrityException(String
+                .format("Conflict type: ImdbTVSeries or ImdbEpisode expected but %s provided.", imdbTitle.getClass()));
         }
 
-        season.setEpisodesCount(checkDataIntegrity(doubanSeries.getNumberOfEpisodes(), "number of episodes of the season"));
+        season.setEpisodesCount(
+            checkDataIntegrity(doubanSeries.getNumberOfEpisodes(), "number of episodes of the season"));
         season.setDoubanId(doubanId);
         season.setZhTitle(doubanSeries.getZhTitle());
         season.setOriginalTitle(doubanSeries.getOriginalTitle());
@@ -168,7 +194,8 @@ public class VideoServiceImpl implements VideoService {
     /**
      * All parameters are required to be not null.
      */
-    private long insertMovie(String imdbId, ImdbMovie imdbMovie, long dbId, DoubanMovie doubanMovie) throws DataIntegrityException {
+    private long insertMovie(String imdbId, ImdbMovie imdbMovie, long dbId, DoubanMovie doubanMovie)
+        throws DataIntegrityException {
         MovieDO movie = new MovieDO();
         movie.setImdbId(imdbId);
         movie.setDoubanId(dbId);
