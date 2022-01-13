@@ -1,6 +1,6 @@
 package cn.wsg.repository.config.jackson;
 
-import cn.wsg.commons.internet.common.MovieGenre;
+import cn.wsg.commons.internet.common.video.MovieGenre;
 import cn.wsg.commons.lang.DatetimeConsts;
 import cn.wsg.commons.lang.Language;
 import cn.wsg.commons.lang.Region;

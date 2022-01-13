@@ -5,7 +5,7 @@ import cn.wsg.commons.internet.com.douban.DoubanRepository;
 import cn.wsg.commons.internet.com.douban.DoubanTVSeries;
 import cn.wsg.commons.internet.com.douban.DoubanVideo;
 import cn.wsg.commons.internet.com.imdb.*;
-import cn.wsg.commons.internet.common.MovieGenre;
+import cn.wsg.commons.internet.common.video.MovieGenre;
 import cn.wsg.commons.internet.support.LoginException;
 import cn.wsg.commons.internet.support.NotFoundException;
 import cn.wsg.commons.internet.support.UnexpectedException;
