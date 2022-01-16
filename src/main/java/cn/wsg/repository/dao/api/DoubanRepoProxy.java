@@ -14,17 +14,17 @@ import java.io.Closeable;
 import java.util.List;
 
 /**
- * Adapter of {@link DoubanRepository}.
+ * The proxy of {@link DoubanRepository}.
  *
  * @author Kingen
  */
 @Component
-public class DoubanRepoAdapter implements DoubanRepository, DisposableBean {
+public class DoubanRepoProxy implements DoubanRepository, DisposableBean {
 
     private final DoubanRepository repository;
     private final VideoIdRelationMapper relationMapper;
 
-    public DoubanRepoAdapter(VideoIdRelationMapper relationMapper) {
+    public DoubanRepoProxy(VideoIdRelationMapper relationMapper) {
         this.repository = new DoubanRepositoryImpl();
         this.relationMapper = relationMapper;
     }
