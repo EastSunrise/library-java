@@ -1,6 +1,6 @@
 package cn.wsg.repository.common.enums;
 
-import cn.wsg.commons.web.BilingualDisplayable;
+import cn.wsg.commons.lang.function.BilingualDisplayable;
 
 /**
  * @author Kingen
@@ -20,12 +20,12 @@ public enum CelebrityStatus implements BilingualDisplayable {
     }
 
     @Override
-    public String getZhDisplayName() {
+    public String getZhName() {
         return zhName;
     }
 
     @Override
-    public String getEnDisplayName() {
+    public String getEnName() {
         return enName;
     }
 }

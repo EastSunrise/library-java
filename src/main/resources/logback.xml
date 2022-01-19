@@ -1,34 +1,57 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <configuration debug="false">
 
-    <appender name="stdout" class="ch.qos.logback.core.ConsoleAppender">
+    <appender name="console" class="ch.qos.logback.core.ConsoleAppender">
         <encoder>
             <pattern>%d{YYYY-MM-DD HH:mm:ss.SSS} [%thread] %level %logger - %msg%n</pattern>
         </encoder>
     </appender>
 
-    <appender name="file" class="ch.qos.logback.core.rolling.RollingFileAppender">
+    <!-- except error -->
+    <appender name="fileInfoLog" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <filter class="ch.qos.logback.classic.filter.LevelFilter">
+            <level>ERROR</level>
+            <onMatch>DENY</onMatch>
+            <onMismatch>ACCEPT</onMismatch>
+        </filter>
+
         <encoder>
-            <pattern>%d{YYYY-MM-DD HH:mm:ss.SSS} [%thread] %level %logger - %msg%n</pattern>
+            <pattern>
+                <pattern>%d{YYYY-MM-DD HH:mm:ss.SSS} [%thread] %level %logger - %msg%n</pattern>
+            </pattern>
         </encoder>
-        <file>log/repository.log</file>
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-            <fileNamePattern>log/repository.%d{yyyy-MM-dd}.log</fileNamePattern>
-            <maxHistory>30</maxHistory>
-            <totalSizeCap>1GB</totalSizeCap>
+            <fileNamePattern>logs/info.%d{yyyy-MM-dd}.log</fileNamePattern>
+        </rollingPolicy>
+    </appender>
+
+    <!-- only error -->
+    <appender name="fileErrorLog" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+            <level>ERROR</level>
+        </filter>
+
+        <encoder>
+            <pattern>
+                <pattern>%d{YYYY-MM-DD HH:mm:ss.SSS} [%thread] %level %logger - %msg%n</pattern>
+            </pattern>
+        </encoder>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>logs/error.%d{yyyy-MM-dd}.log</fileNamePattern>
         </rollingPolicy>
     </appender>
 
     <logger name="org.springframework.test" level="INFO">
-        <appender-ref ref="stdout"/>
+        <appender-ref ref="console"/>
     </logger>
 
     <logger name="org.apache.http" level="WARN">
-        <appender-ref ref="stdout"/>
+        <appender-ref ref="console"/>
     </logger>
 
     <root level="info">
-        <appender-ref ref="stdout"/>
-        <appender-ref ref="file"/>
+        <appender-ref ref="console"/>
+        <appender-ref ref="fileInfoLog"/>
+        <appender-ref ref="fileErrorLog"/>
     </root>
 </configuration>
