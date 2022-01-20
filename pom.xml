@@ -31,6 +31,11 @@
             <groupId>cn.wsg.commons</groupId>
             <version>${wsg.commons.version}</version>
         </dependency>
+        <dependency>
+            <groupId>cn.wsg.commons</groupId>
+            <artifactId>commons-system</artifactId>
+            <version>${wsg.commons.version}</version>
+        </dependency>
 
         <dependency>
             <artifactId>spring-boot-starter-freemarker</artifactId>
