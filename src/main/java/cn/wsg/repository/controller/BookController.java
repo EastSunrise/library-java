@@ -5,12 +5,13 @@ import cn.wsg.repository.common.dto.QueryBookDTO;
 import cn.wsg.repository.common.dto.SaveBookDTO;
 import cn.wsg.repository.common.enums.ReadStatus;
 import cn.wsg.repository.service.BookService;
-import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.List;
 
 /**
  * Book-related apis.

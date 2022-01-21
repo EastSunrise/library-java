@@ -1,8 +1,9 @@
 package cn.wsg.repository.dao.mapper.lib;
 
 import cn.wsg.repository.entity.lib.CategoryDO;
-import java.util.List;
 import org.apache.ibatis.annotations.Mapper;
+
+import java.util.List;
 
 /**
  * Mapper for CRUD operations of categories.

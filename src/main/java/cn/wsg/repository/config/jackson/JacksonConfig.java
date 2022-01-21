@@ -1,10 +1,10 @@
 package cn.wsg.repository.config.jackson;
 
+import cn.wsg.commons.DatetimeConsts;
+import cn.wsg.commons.Language;
+import cn.wsg.commons.Region;
 import cn.wsg.commons.internet.common.video.MovieGenre;
-import cn.wsg.commons.lang.DatetimeConsts;
-import cn.wsg.commons.lang.Language;
-import cn.wsg.commons.lang.Region;
-import cn.wsg.commons.lang.jackson.EnumDeserializers;
+import cn.wsg.commons.jackson.EnumDeserializers;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.module.SimpleModule;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;

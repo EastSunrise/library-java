@@ -1,8 +1,8 @@
 package cn.wsg.repository.entity.video;
 
+import cn.wsg.commons.Language;
+import cn.wsg.commons.Region;
 import cn.wsg.commons.internet.common.video.MovieGenre;
-import cn.wsg.commons.lang.Language;
-import cn.wsg.commons.lang.Region;
 import lombok.Getter;
 import lombok.Setter;
 

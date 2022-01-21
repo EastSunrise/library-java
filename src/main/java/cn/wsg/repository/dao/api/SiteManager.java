@@ -1,6 +1,6 @@
 package cn.wsg.repository.dao.api;
 
-import cn.wsg.commons.internet.com.imdb.ImdbRepositoryImpl;
+import cn.wsg.repository.com.imdb.ImdbRepositoryImpl;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 

@@ -2,11 +2,12 @@ package cn.wsg.repository.controller;
 
 import cn.wsg.repository.common.dto.CategoryDTO;
 import cn.wsg.repository.service.LibraryService;
-import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.List;
 
 /**
  * Library-related apis.

@@ -1,7 +1,7 @@
 package cn.wsg.repository.service;
 
-import cn.wsg.commons.internet.com.douban.DoubanVideo;
 import cn.wsg.commons.internet.support.NotFoundException;
+import cn.wsg.repository.com.douban.DoubanVideo;
 import cn.wsg.repository.common.dto.QueryVideoDTO;
 import cn.wsg.repository.common.error.DataIntegrityException;
 

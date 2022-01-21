@@ -1,10 +1,11 @@
 package cn.wsg.repository.entity.video;
 
 import cn.wsg.repository.common.enums.CelebrityStatus;
-import java.io.Serializable;
-import java.time.LocalDateTime;
 import lombok.Getter;
 import lombok.ToString;
+
+import java.io.Serializable;
+import java.time.LocalDateTime;
 
 /**
  * @author Kingen

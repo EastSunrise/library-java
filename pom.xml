@@ -1,7 +1,61 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-  xmlns="http://maven.apache.org/POM/4.0.0"
-  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+         xmlns="http://maven.apache.org/POM/4.0.0"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <groupId>org.springframework.boot</groupId>
+        <version>2.5.8</version>
+    </parent>
+
+    <groupId>cn.wsg</groupId>
+    <artifactId>repository</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
+    <name>repository</name>
+    <description>My Repository</description>
+
+    <properties>
+        <wsg.commons.version>1.0-SNAPSHOT</wsg.commons.version>
+        <mybatis-spring.version>2.2.0</mybatis-spring.version>
+    </properties>
+
+    <dependencies>
+        <dependency>
+            <groupId>cn.wsg.commons</groupId>
+            <artifactId>commons-internet</artifactId>
+            <version>${wsg.commons.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>cn.wsg.commons</groupId>
+            <artifactId>commons-system</artifactId>
+            <version>${wsg.commons.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+
+        <dependency>
+            <artifactId>mybatis-spring-boot-starter</artifactId>
+            <groupId>org.mybatis.spring.boot</groupId>
+            <version>${mybatis-spring.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+        </dependency>
+    </dependencies>
+
     <build>
         <plugins>
             <plugin>
@@ -16,90 +70,14 @@
                 </configuration>
                 <groupId>org.springframework.boot</groupId>
             </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <source>11</source>
+                    <target>11</target>
+                </configuration>
+            </plugin>
         </plugins>
     </build>
-    <artifactId>repository</artifactId>
-
-    <dependencies>
-        <dependency>
-            <artifactId>commons-internet</artifactId>
-            <groupId>cn.wsg.commons</groupId>
-            <version>${wsg.commons.version}</version>
-        </dependency>
-        <dependency>
-            <artifactId>commons-web</artifactId>
-            <groupId>cn.wsg.commons</groupId>
-            <version>${wsg.commons.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>cn.wsg.commons</groupId>
-            <artifactId>commons-system</artifactId>
-            <version>${wsg.commons.version}</version>
-        </dependency>
-
-        <dependency>
-            <artifactId>spring-boot-starter-freemarker</artifactId>
-            <groupId>org.springframework.boot</groupId>
-        </dependency>
-        <dependency>
-            <artifactId>spring-boot-starter-web</artifactId>
-            <groupId>org.springframework.boot</groupId>
-        </dependency>
-        <dependency>
-            <artifactId>mybatis-spring-boot-starter</artifactId>
-            <groupId>org.mybatis.spring.boot</groupId>
-            <version>${mybatis-spring.version}</version>
-        </dependency>
-
-        <dependency>
-            <artifactId>spring-boot-devtools</artifactId>
-            <groupId>org.springframework.boot</groupId>
-            <optional>true</optional>
-            <scope>runtime</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-logging</artifactId>
-        </dependency>
-        <dependency>
-            <artifactId>mysql-connector-java</artifactId>
-            <groupId>mysql</groupId>
-            <scope>runtime</scope>
-        </dependency>
-
-        <dependency>
-            <artifactId>commons-lang3</artifactId>
-            <groupId>org.apache.commons</groupId>
-        </dependency>
-
-        <dependency>
-            <artifactId>lombok</artifactId>
-            <groupId>org.projectlombok</groupId>
-            <optional>true</optional>
-        </dependency>
-        <dependency>
-            <artifactId>spring-boot-starter-test</artifactId>
-            <groupId>org.springframework.boot</groupId>
-            <scope>test</scope>
-        </dependency>
-    </dependencies>
-    <description>My Repository</description>
-    <groupId>cn.wsg</groupId>
-    <modelVersion>4.0.0</modelVersion>
-    <name>repository</name>
-
-    <parent>
-        <artifactId>spring-boot-starter-parent</artifactId>
-        <groupId>org.springframework.boot</groupId>
-        <relativePath/>
-        <version>2.5.8</version>
-    </parent>
-
-    <properties>
-        <java.version>11</java.version>
-        <mybatis-spring.version>2.2.0</mybatis-spring.version>
-        <wsg.commons.version>1.0-SNAPSHOT</wsg.commons.version>
-    </properties>
-
-    <version>0.0.1-SNAPSHOT</version>
 </project>

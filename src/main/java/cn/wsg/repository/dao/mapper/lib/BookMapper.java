@@ -4,8 +4,9 @@ import cn.wsg.repository.common.dto.BookDTO;
 import cn.wsg.repository.common.dto.QueryBookDTO;
 import cn.wsg.repository.common.enums.ReadStatus;
 import cn.wsg.repository.entity.lib.BookDO;
-import java.util.List;
 import org.apache.ibatis.annotations.Mapper;
+
+import java.util.List;
 
 /**
  * Mapper for CRUD operations of books.

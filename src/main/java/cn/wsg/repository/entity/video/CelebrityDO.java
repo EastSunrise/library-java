@@ -1,12 +1,13 @@
 package cn.wsg.repository.entity.video;
 
-import cn.wsg.commons.lang.Region;
+import cn.wsg.commons.Region;
 import cn.wsg.repository.common.enums.Gender;
+import lombok.Getter;
+import lombok.ToString;
+
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import lombok.Getter;
-import lombok.ToString;
 
 /**
  * @author Kingen

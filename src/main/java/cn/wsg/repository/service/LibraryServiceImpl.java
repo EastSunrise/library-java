@@ -30,7 +30,8 @@ public class LibraryServiceImpl implements LibraryService {
         if (StringUtils.isBlank(idx) && StringUtils.isBlank(superIdx)) {
             return new ArrayList<>();
         }
-        return categoryMapper.listBy(idx, superIdx).stream().map(category -> new CategoryDTO(category.getIdx(), category.getTitle(), category.getLeaf()))
+        return categoryMapper.listBy(idx, superIdx).stream()
+            .map(category -> new CategoryDTO(category.getIdx(), category.getTitle(), category.getLeaf()))
             .collect(Collectors.toList());
     }
 }

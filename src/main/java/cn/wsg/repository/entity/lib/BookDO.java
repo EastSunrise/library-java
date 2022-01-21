@@ -2,12 +2,13 @@ package cn.wsg.repository.entity.lib;
 
 import cn.wsg.repository.common.enums.CollectStatus;
 import cn.wsg.repository.common.enums.ReadStatus;
-import java.io.Serializable;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
+
+import java.io.Serializable;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 /**
  * @author Kingen

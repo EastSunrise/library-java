@@ -1,6 +1,6 @@
 package cn.wsg.repository.common.enums;
 
-import cn.wsg.commons.lang.function.BilingualDisplayable;
+import cn.wsg.commons.function.BilingualDisplayable;
 
 /**
  * @author Kingen

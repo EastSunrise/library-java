@@ -1,8 +1,8 @@
 package cn.wsg.repository.dao.typehandler;
 
+import cn.wsg.commons.Language;
+import cn.wsg.commons.Region;
 import cn.wsg.commons.internet.common.video.MovieGenre;
-import cn.wsg.commons.lang.Language;
-import cn.wsg.commons.lang.Region;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;

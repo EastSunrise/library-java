@@ -1,6 +1,6 @@
 package cn.wsg.repository.common.dto;
 
-import cn.wsg.commons.lang.Region;
+import cn.wsg.commons.Region;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;

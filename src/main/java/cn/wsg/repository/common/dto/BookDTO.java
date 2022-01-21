@@ -1,9 +1,10 @@
 package cn.wsg.repository.common.dto;
 
 import cn.wsg.repository.common.enums.ReadStatus;
-import java.util.List;
 import lombok.Getter;
 import lombok.ToString;
+
+import java.util.List;
 
 /**
  * Extra properties of a book.

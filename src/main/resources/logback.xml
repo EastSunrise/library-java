@@ -7,14 +7,7 @@
         </encoder>
     </appender>
 
-    <!-- except error -->
-    <appender name="fileInfoLog" class="ch.qos.logback.core.rolling.RollingFileAppender">
-        <filter class="ch.qos.logback.classic.filter.LevelFilter">
-            <level>ERROR</level>
-            <onMatch>DENY</onMatch>
-            <onMismatch>ACCEPT</onMismatch>
-        </filter>
-
+    <appender name="fileLog" class="ch.qos.logback.core.rolling.RollingFileAppender">
         <encoder>
             <pattern>
                 <pattern>%d{YYYY-MM-DD HH:mm:ss.SSS} [%thread] %level %logger - %msg%n</pattern>
@@ -51,7 +44,7 @@
 
     <root level="info">
         <appender-ref ref="console"/>
-        <appender-ref ref="fileInfoLog"/>
+        <appender-ref ref="fileLog"/>
         <appender-ref ref="fileErrorLog"/>
     </root>
 </configuration>

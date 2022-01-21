@@ -1,10 +1,10 @@
 package cn.wsg.repository.dao.api;
 
-import cn.wsg.commons.internet.com.douban.*;
 import cn.wsg.commons.internet.page.Page;
 import cn.wsg.commons.internet.page.PageIndex;
 import cn.wsg.commons.internet.support.LoginException;
 import cn.wsg.commons.internet.support.NotFoundException;
+import cn.wsg.repository.com.douban.*;
 import cn.wsg.repository.dao.mapper.video.VideoIdRelationMapper;
 import cn.wsg.repository.entity.video.VideoIdRelationDO;
 import org.springframework.beans.factory.DisposableBean;

@@ -1,6 +1,6 @@
 package cn.wsg.repository.controller;
 
-import cn.wsg.commons.internet.com.douban.DoubanVideo;
+import cn.wsg.repository.com.douban.DoubanVideo;
 import cn.wsg.repository.common.dto.QueryVideoDTO;
 import cn.wsg.repository.common.error.DataIntegrityException;
 import cn.wsg.repository.service.VideoService;

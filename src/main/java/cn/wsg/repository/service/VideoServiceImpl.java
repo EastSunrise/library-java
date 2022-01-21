@@ -1,17 +1,17 @@
 package cn.wsg.repository.service;
 
-import cn.wsg.commons.internet.com.douban.DoubanMovie;
-import cn.wsg.commons.internet.com.douban.DoubanRepository;
-import cn.wsg.commons.internet.com.douban.DoubanTVSeries;
-import cn.wsg.commons.internet.com.douban.DoubanVideo;
-import cn.wsg.commons.internet.com.imdb.*;
+import cn.wsg.commons.Language;
+import cn.wsg.commons.Region;
 import cn.wsg.commons.internet.common.video.MovieGenre;
 import cn.wsg.commons.internet.support.LoginException;
 import cn.wsg.commons.internet.support.NotFoundException;
 import cn.wsg.commons.internet.support.UnexpectedException;
-import cn.wsg.commons.lang.CollectionUtilsExt;
-import cn.wsg.commons.lang.Language;
-import cn.wsg.commons.lang.Region;
+import cn.wsg.commons.util.CollectionUtilsExt;
+import cn.wsg.repository.com.douban.DoubanMovie;
+import cn.wsg.repository.com.douban.DoubanRepository;
+import cn.wsg.repository.com.douban.DoubanTVSeries;
+import cn.wsg.repository.com.douban.DoubanVideo;
+import cn.wsg.repository.com.imdb.*;
 import cn.wsg.repository.common.dto.QueryVideoDTO;
 import cn.wsg.repository.common.error.DataIntegrityException;
 import cn.wsg.repository.dao.mapper.video.MovieMapper;

@@ -1,7 +1,7 @@
 package cn.wsg.repository.config.jackson;
 
-import cn.wsg.commons.internet.com.douban.RegionMapping;
-import cn.wsg.commons.lang.Region;
+import cn.wsg.commons.Region;
+import cn.wsg.repository.com.douban.RegionMapping;
 import com.fasterxml.jackson.databind.DeserializationContext;
 import com.fasterxml.jackson.databind.deser.std.FromStringDeserializer;
 
