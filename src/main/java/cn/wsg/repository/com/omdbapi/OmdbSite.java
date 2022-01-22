@@ -2,7 +2,7 @@ package cn.wsg.repository.com.omdbapi;
 
 import cn.wsg.commons.Language;
 import cn.wsg.commons.Region;
-import cn.wsg.commons.internet.BaseSite;
+import cn.wsg.commons.internet.BaseSiteClient;
 import cn.wsg.commons.internet.common.video.MovieGenre;
 import cn.wsg.commons.internet.page.Page;
 import cn.wsg.commons.internet.page.PageIndex;
@@ -36,7 +36,7 @@ import java.util.Objects;
 /**
  * @author Kingen
  */
-public final class OmdbSite extends BaseSite implements OmdbApi {
+public final class OmdbSite extends BaseSiteClient implements OmdbApi {
 
     private static final String NOT_FOUND_MSG = "not found!";
 

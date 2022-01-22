@@ -6,7 +6,7 @@ import cn.wsg.commons.intangible.Length;
 import cn.wsg.commons.intangible.LengthUnit;
 import cn.wsg.commons.intangible.Mass;
 import cn.wsg.commons.intangible.MassUnit;
-import cn.wsg.commons.internet.BaseSite;
+import cn.wsg.commons.internet.BaseSiteClient;
 import cn.wsg.commons.internet.common.BloodType;
 import cn.wsg.commons.internet.common.Constellation;
 import cn.wsg.commons.internet.common.Gender;
@@ -50,7 +50,7 @@ import java.util.stream.Stream;
  * @author Kingen
  */
 @Slf4j
-public final class CelebrityWikiSite extends BaseSite implements CelebrityWiki {
+public final class CelebrityWikiSite extends BaseSiteClient implements CelebrityWiki {
 
     private static final String HOME_PAGE = "http://www.mrbke.com";
     private static final String NO_PERSON_IMG = "noperson.jpg";

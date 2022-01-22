@@ -1,7 +1,7 @@
 package cn.wsg.repository.com.douban;
 
-import cn.wsg.commons.internet.AbstractLoggableSite;
-import cn.wsg.commons.internet.BaseSite;
+import cn.wsg.commons.internet.AbstractLoggableSiteClient;
+import cn.wsg.commons.internet.BaseSiteClient;
 import cn.wsg.commons.internet.common.video.MovieGenre;
 import cn.wsg.commons.internet.page.Page;
 import cn.wsg.commons.internet.page.PageIndex;
@@ -41,7 +41,7 @@ import java.util.stream.Collectors;
  * @author Kingen
  */
 @Slf4j
-public class DoubanRepositoryImpl extends AbstractLoggableSite<Long> implements DoubanRepository {
+public class DoubanRepositoryImpl extends AbstractLoggableSiteClient<Long> implements DoubanRepository {
 
     public DoubanRepositoryImpl() {
         super("豆瓣", HttpHost.create("https://douban.com"), SiteHelper.defaultClient(), SiteHelper.defaultContext());
@@ -51,7 +51,7 @@ public class DoubanRepositoryImpl extends AbstractLoggableSite<Long> implements 
     public void login(String username, String password) throws LoginException {
         this.logout();
         RequestBuilder builder =
-            this.create("accounts", BaseSite.METHOD_POST, "/j/mobile/login/basic").addParameter("ck", "")
+            this.create("accounts", BaseSiteClient.METHOD_POST, "/j/mobile/login/basic").addParameter("ck", "")
                 .addParameter("remember", String.valueOf(true)).addParameter("name", username)
                 .addParameter("password", password);
         LoginResult result;
@@ -257,7 +257,7 @@ public class DoubanRepositoryImpl extends AbstractLoggableSite<Long> implements 
             throw new LoginException("Please log in first.");
         }
         AssertUtils.requireNotBlank(imdbId);
-        RequestBuilder builder = this.create("movie", BaseSite.METHOD_POST, "/new_subject")
+        RequestBuilder builder = this.create("movie", BaseSiteClient.METHOD_POST, "/new_subject")
             .addParameter("ck", Objects.requireNonNull(this.getCookie("ck")).getValue()).addParameter("type", "0")
             .addParameter("p_title", imdbId).addParameter("p_uid", imdbId)
             .addParameter("cat", String.valueOf(DoubanCatalog.MOVIE.getIntCode()))
@@ -300,7 +300,7 @@ public class DoubanRepositoryImpl extends AbstractLoggableSite<Long> implements 
         if (catalog == null) {
             return httpGet(path, args);
         }
-        return this.create(catalog.name().toLowerCase(), BaseSite.METHOD_GET, path, args);
+        return this.create(catalog.name().toLowerCase(), BaseSiteClient.METHOD_GET, path, args);
     }
 
     private static final class Lazy {

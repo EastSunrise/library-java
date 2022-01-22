@@ -2,7 +2,7 @@ package cn.wsg.repository.com.imdb;
 
 import cn.wsg.commons.Language;
 import cn.wsg.commons.Region;
-import cn.wsg.commons.internet.BaseSite;
+import cn.wsg.commons.internet.BaseSiteClient;
 import cn.wsg.commons.internet.common.video.MovieGenre;
 import cn.wsg.commons.internet.common.video.ReleaseDate;
 import cn.wsg.commons.internet.common.video.ReleaseInfo;
@@ -36,7 +36,7 @@ import java.util.stream.Stream;
 /**
  * @author Kingen
  */
-public class ImdbRepositoryImpl extends BaseSite implements ImdbRepository {
+public class ImdbRepositoryImpl extends BaseSiteClient implements ImdbRepository {
 
     public ImdbRepositoryImpl() {
         super("IMDb", HttpHost.create("https://www.imdb.com"), SiteHelper.defaultClient(), SiteHelper.defaultContext());

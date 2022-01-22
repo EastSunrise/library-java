@@ -2,7 +2,7 @@ package cn.wsg.repository.com.bd2020;
 
 import cn.wsg.commons.DatetimeConsts;
 import cn.wsg.commons.WebConsts;
-import cn.wsg.commons.internet.BaseSite;
+import cn.wsg.commons.internet.BaseSiteClient;
 import cn.wsg.commons.internet.common.video.resource.VideoResourceRepository;
 import cn.wsg.commons.internet.download.DownloadLink;
 import cn.wsg.commons.internet.download.InvalidLinkException;
@@ -36,7 +36,7 @@ import java.util.stream.IntStream;
  * @see <a href="https://www.bd2020.com/">BD Movies</a>
  */
 @Slf4j
-public final class BdMovieSite extends BaseSite implements VideoResourceRepository<BdMovieItem> {
+public final class BdMovieSite extends BaseSiteClient implements VideoResourceRepository<BdMovieItem> {
 
     private static final int MIN_ID = 348;
     private static final int EXCEPT_ONE = 30508;

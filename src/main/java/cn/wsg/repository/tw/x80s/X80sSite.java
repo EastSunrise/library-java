@@ -1,6 +1,6 @@
 package cn.wsg.repository.tw.x80s;
 
-import cn.wsg.commons.internet.BaseSite;
+import cn.wsg.commons.internet.BaseSiteClient;
 import cn.wsg.commons.internet.common.video.resource.VideoResourceRepository;
 import cn.wsg.commons.internet.download.DownloadLink;
 import cn.wsg.commons.internet.download.InvalidLinkException;
@@ -35,7 +35,7 @@ import java.util.stream.IntStream;
  * @see <a href="https://m.80s.tw/">80s Movies for Mobile</a>
  */
 @Slf4j
-public class X80sSite extends BaseSite implements VideoResourceRepository<X80sItem> {
+public class X80sSite extends BaseSiteClient implements VideoResourceRepository<X80sItem> {
 
     private static final int MIN_ID = 32;
     private static final Range<Integer> EXCEPTS = Range.between(1501, 3008);

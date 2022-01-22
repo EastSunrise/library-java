@@ -1,6 +1,6 @@
 package cn.wsg.repository.com.clcindex;
 
-import cn.wsg.commons.internet.BaseSite;
+import cn.wsg.commons.internet.BaseSiteClient;
 import cn.wsg.commons.internet.support.CssSelectors;
 import org.apache.http.HttpHost;
 import org.apache.http.client.methods.RequestBuilder;
@@ -18,7 +18,7 @@ import java.util.List;
  * @author Kingen
  * @see <a href="https://www.clcindex.com/category/">Chinese Library Classification</a>
  */
-public class ClcIndex extends BaseSite {
+public class ClcIndex extends BaseSiteClient {
 
     public ClcIndex() {
         super("CLC Index", HttpHost.create("https://www.clcindex.com"));

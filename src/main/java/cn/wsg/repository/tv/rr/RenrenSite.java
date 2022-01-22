@@ -1,7 +1,7 @@
 package cn.wsg.repository.tv.rr;
 
 import cn.wsg.commons.Region;
-import cn.wsg.commons.internet.BaseSite;
+import cn.wsg.commons.internet.BaseSiteClient;
 import cn.wsg.commons.internet.common.video.MovieGenre;
 import cn.wsg.commons.internet.support.NotFoundException;
 import cn.wsg.commons.internet.support.UnexpectedException;
@@ -28,7 +28,7 @@ import java.util.Objects;
 /**
  * @author Kingen
  */
-public class RenrenSite extends BaseSite implements RenrenTube {
+public class RenrenSite extends BaseSiteClient implements RenrenTube {
 
     public RenrenSite() {
         super("RR TV", HttpHost.create("https://rr.tv/"));
@@ -45,7 +45,7 @@ public class RenrenSite extends BaseSite implements RenrenTube {
         } catch (JsonProcessingException e) {
             throw new UnexpectedException(e);
         }
-        RequestBuilder builder = create("web-api", BaseSite.METHOD_POST, "/web/drama/filter_search");
+        RequestBuilder builder = create("web-api", BaseSiteClient.METHOD_POST, "/web/drama/filter_search");
         builder.setEntity(EntityBuilder.create().setContentType(ContentType.APPLICATION_JSON).setText(json).build());
         RenrenResponse<RenrenResponse.Result> response = getObject(builder, Lazy.MAPPER, new TypeReference<>() {
         });
@@ -55,7 +55,7 @@ public class RenrenSite extends BaseSite implements RenrenTube {
     @Override
     public List<SearchedItem> search(String keyword, int size) {
         AssertUtils.requireRange(size, 1, null);
-        RequestBuilder builder = create("web-api", BaseSite.METHOD_GET, "/web/drama/search/season");
+        RequestBuilder builder = create("web-api", BaseSiteClient.METHOD_GET, "/web/drama/search/season");
         builder.addParameter("keywords", AssertUtils.requireNotBlank(keyword));
         builder.addParameter("size", String.valueOf(size));
         builder.addParameter("webChannel", "M_STATION");

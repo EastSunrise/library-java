@@ -1,6 +1,6 @@
 package cn.wsg.repository.in.xunleicang;
 
-import cn.wsg.commons.internet.BaseSite;
+import cn.wsg.commons.internet.BaseSiteClient;
 import cn.wsg.commons.internet.common.video.VideoConsts;
 import cn.wsg.commons.internet.common.video.resource.ResourceState;
 import cn.wsg.commons.internet.common.video.resource.VideoResourceRepository;
@@ -45,7 +45,7 @@ import java.util.stream.Stream;
  * @see <a href="https://www.xunleicang.in/">XunLeiCang</a>
  */
 @Slf4j
-public final class XlcSite extends BaseSite implements VideoResourceRepository<XlcItem> {
+public final class XlcSite extends BaseSiteClient implements VideoResourceRepository<XlcItem> {
 
     private static final int TITLE_SUFFIX_LENGTH = 14;
     private static final String NO_PIC = "nopic.jpg";

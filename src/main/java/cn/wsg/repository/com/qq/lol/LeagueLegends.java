@@ -1,7 +1,7 @@
 package cn.wsg.repository.com.qq.lol;
 
 import cn.wsg.commons.DatetimeConsts;
-import cn.wsg.commons.internet.BaseSite;
+import cn.wsg.commons.internet.BaseSiteClient;
 import cn.wsg.commons.internet.support.NotFoundException;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
@@ -21,7 +21,7 @@ import java.util.List;
  * @author Kingen
  * @see <a href="https://lol.qq.com/main.shtml">League of Legends</a>
  */
-public class LeagueLegends extends BaseSite {
+public class LeagueLegends extends BaseSiteClient {
 
     public LeagueLegends() {
         super("League of Legends", HttpHost.create("https://lol.qq.com"));

@@ -20,10 +20,10 @@ class OmdbDeserializationProblemHandler extends DeserializationProblemHandler {
             return null;
         }
         if (Integer.class.equals(targetType) || int.class.equals(targetType)) {
-            return (int)NumberUtilsExt.parseCommaSeparatedNumber(valueToConvert);
+            return (int)NumberUtilsExt.parseSeparatedNumber(valueToConvert, ',');
         }
         if (Long.class.equals(targetType) || long.class.equals(targetType)) {
-            return NumberUtilsExt.parseCommaSeparatedNumber(valueToConvert);
+            return NumberUtilsExt.parseSeparatedNumber(valueToConvert, ',');
         }
         return super.handleWeirdStringValue(ctxt, targetType, valueToConvert, failureMsg);
     }
