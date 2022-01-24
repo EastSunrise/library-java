@@ -1,6 +1,6 @@
 package cn.wsg.repository.com.imdb;
 
-import cn.wsg.commons.internet.org.schema.item.VideoObject;
+import cn.wsg.commons.data.schema.item.VideoObject;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import com.fasterxml.jackson.annotation.JsonTypeName;

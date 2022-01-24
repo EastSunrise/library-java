@@ -1,13 +1,11 @@
 package cn.wsg.repository.in.xunleicang;
 
+import cn.wsg.commons.data.common.video.VideoConsts;
+import cn.wsg.commons.data.download.DownloadLink;
+import cn.wsg.commons.data.download.InvalidLinkException;
+import cn.wsg.commons.data.download.LinkFactory;
+import cn.wsg.commons.data.download.Thunder;
 import cn.wsg.commons.internet.BaseSiteClient;
-import cn.wsg.commons.internet.common.video.VideoConsts;
-import cn.wsg.commons.internet.common.video.resource.ResourceState;
-import cn.wsg.commons.internet.common.video.resource.VideoResourceRepository;
-import cn.wsg.commons.internet.download.DownloadLink;
-import cn.wsg.commons.internet.download.InvalidLinkException;
-import cn.wsg.commons.internet.download.LinkFactory;
-import cn.wsg.commons.internet.download.Thunder;
 import cn.wsg.commons.internet.repository.ListRepository;
 import cn.wsg.commons.internet.repository.support.Repositories;
 import cn.wsg.commons.internet.support.CssSelectors;
@@ -17,6 +15,8 @@ import cn.wsg.commons.util.EnumUtilExt;
 import cn.wsg.commons.util.MapUtilsExt;
 import cn.wsg.commons.util.NetUtils;
 import cn.wsg.commons.util.RegExUtilsExt;
+import cn.wsg.repository.resource.ResourceState;
+import cn.wsg.repository.resource.VideoResourceRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.tuple.Pair;

@@ -1,7 +1,7 @@
 package cn.wsg.repository.com.imdb;
 
-import cn.wsg.commons.internet.common.video.Rating;
-import cn.wsg.commons.internet.org.schema.item.Review;
+import cn.wsg.commons.data.common.video.Rating;
+import cn.wsg.commons.data.schema.item.Review;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import com.fasterxml.jackson.annotation.JsonTypeName;

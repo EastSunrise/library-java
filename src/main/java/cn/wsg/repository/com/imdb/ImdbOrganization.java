@@ -1,6 +1,6 @@
 package cn.wsg.repository.com.imdb;
 
-import cn.wsg.commons.internet.org.schema.item.Organization;
+import cn.wsg.commons.data.schema.item.Organization;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import com.fasterxml.jackson.annotation.JsonTypeName;
 import lombok.AccessLevel;

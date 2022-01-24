@@ -1,6 +1,6 @@
 package cn.wsg.repository.com.imdb;
 
-import cn.wsg.commons.Language;
+import cn.wsg.commons.data.common.Language;
 
 import java.util.function.Supplier;
 

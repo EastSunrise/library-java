@@ -1,6 +1,6 @@
 package cn.wsg.repository.com.douban;
 
-import cn.wsg.commons.internet.org.schema.item.Book;
+import cn.wsg.commons.data.schema.item.Book;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import com.fasterxml.jackson.annotation.JsonTypeName;

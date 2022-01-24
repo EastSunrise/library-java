@@ -1,8 +1,8 @@
 package cn.wsg.repository.in.xunleicang;
 
-import cn.wsg.commons.internet.common.video.resource.BaseResourceItem;
-import cn.wsg.commons.internet.common.video.resource.ResourceState;
-import cn.wsg.commons.internet.download.DownloadLink;
+import cn.wsg.commons.data.download.DownloadLink;
+import cn.wsg.repository.resource.BaseResourceItem;
+import cn.wsg.repository.resource.ResourceState;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.Setter;

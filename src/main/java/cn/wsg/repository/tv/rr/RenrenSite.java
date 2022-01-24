@@ -1,8 +1,8 @@
 package cn.wsg.repository.tv.rr;
 
-import cn.wsg.commons.Region;
+import cn.wsg.commons.data.common.Region;
+import cn.wsg.commons.data.common.video.MovieGenre;
 import cn.wsg.commons.internet.BaseSiteClient;
-import cn.wsg.commons.internet.common.video.MovieGenre;
 import cn.wsg.commons.internet.support.NotFoundException;
 import cn.wsg.commons.internet.support.UnexpectedException;
 import cn.wsg.commons.jackson.EnumDeserializers;

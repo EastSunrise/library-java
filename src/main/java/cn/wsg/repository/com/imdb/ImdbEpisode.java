@@ -1,6 +1,6 @@
 package cn.wsg.repository.com.imdb;
 
-import cn.wsg.commons.internet.org.schema.item.TVEpisode;
+import cn.wsg.commons.data.schema.item.TVEpisode;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AccessLevel;
 import lombok.Getter;

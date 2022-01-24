@@ -1,6 +1,6 @@
 package cn.wsg.repository.com.omdbapi;
 
-import cn.wsg.commons.internet.org.schema.item.TVSeason;
+import cn.wsg.commons.data.schema.item.TVSeason;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import lombok.AccessLevel;

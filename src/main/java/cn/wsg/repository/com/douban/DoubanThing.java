@@ -1,6 +1,6 @@
 package cn.wsg.repository.com.douban;
 
-import cn.wsg.commons.internet.org.schema.item.Thing;
+import cn.wsg.commons.data.schema.item.Thing;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AccessLevel;
 import lombok.Getter;

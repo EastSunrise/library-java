@@ -1,8 +1,8 @@
 package cn.wsg.repository.com.bd2020;
 
-import cn.wsg.commons.internet.common.video.resource.BaseResourceItem;
-import cn.wsg.commons.internet.download.DownloadLink;
+import cn.wsg.commons.data.download.DownloadLink;
 import cn.wsg.commons.internet.view.NextSupplier;
+import cn.wsg.repository.resource.BaseResourceItem;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.Setter;

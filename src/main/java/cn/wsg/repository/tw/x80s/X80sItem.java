@@ -1,7 +1,7 @@
 package cn.wsg.repository.tw.x80s;
 
-import cn.wsg.commons.internet.common.video.resource.BaseResourceItem;
-import cn.wsg.commons.internet.download.DownloadLink;
+import cn.wsg.commons.data.download.DownloadLink;
+import cn.wsg.repository.resource.BaseResourceItem;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.Setter;

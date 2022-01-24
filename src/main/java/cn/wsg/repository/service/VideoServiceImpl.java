@@ -1,8 +1,8 @@
 package cn.wsg.repository.service;
 
-import cn.wsg.commons.Language;
-import cn.wsg.commons.Region;
-import cn.wsg.commons.internet.common.video.MovieGenre;
+import cn.wsg.commons.data.common.Language;
+import cn.wsg.commons.data.common.Region;
+import cn.wsg.commons.data.common.video.MovieGenre;
 import cn.wsg.commons.internet.support.LoginException;
 import cn.wsg.commons.internet.support.NotFoundException;
 import cn.wsg.commons.internet.support.UnexpectedException;

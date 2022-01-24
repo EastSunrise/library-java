@@ -1,6 +1,6 @@
 package cn.wsg.repository.com.imdb;
 
-import cn.wsg.commons.internet.common.video.ReleaseInfo;
+import cn.wsg.commons.data.common.video.ReleaseInfo;
 import cn.wsg.commons.internet.support.NotFoundException;
 import cn.wsg.commons.util.RegExUtilsExt;
 

@@ -1,11 +1,11 @@
 package cn.wsg.repository.com.mrbke;
 
-import cn.wsg.commons.intangible.Length;
-import cn.wsg.commons.intangible.Mass;
-import cn.wsg.commons.internet.common.BloodType;
-import cn.wsg.commons.internet.common.Constellation;
-import cn.wsg.commons.internet.common.Gender;
-import cn.wsg.commons.internet.common.Zodiac;
+import cn.wsg.commons.data.common.BloodType;
+import cn.wsg.commons.data.common.Constellation;
+import cn.wsg.commons.data.common.Gender;
+import cn.wsg.commons.data.common.Zodiac;
+import cn.wsg.commons.data.intangible.Length;
+import cn.wsg.commons.data.intangible.Mass;
 import lombok.*;
 
 import java.util.List;

@@ -1,6 +1,6 @@
 package cn.wsg.repository.entity.video;
 
-import cn.wsg.commons.Region;
+import cn.wsg.commons.data.common.Region;
 import cn.wsg.repository.common.enums.Gender;
 import lombok.Getter;
 import lombok.ToString;

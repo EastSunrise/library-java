@@ -1,6 +1,6 @@
 package cn.wsg.repository.com.omdbapi;
 
-import cn.wsg.commons.internet.org.schema.item.Movie;
+import cn.wsg.commons.data.schema.item.Movie;
 import cn.wsg.commons.jackson.JsonUnknownType;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonProperty;

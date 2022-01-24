@@ -1,10 +1,10 @@
 package cn.wsg.repository.com.douban;
 
-import cn.wsg.commons.Language;
-import cn.wsg.commons.Region;
-import cn.wsg.commons.internet.common.video.AggregateRating;
-import cn.wsg.commons.internet.common.video.MovieGenre;
-import cn.wsg.commons.internet.org.schema.item.CreativeWork;
+import cn.wsg.commons.data.common.Language;
+import cn.wsg.commons.data.common.Region;
+import cn.wsg.commons.data.common.video.AggregateRating;
+import cn.wsg.commons.data.common.video.MovieGenre;
+import cn.wsg.commons.data.schema.item.CreativeWork;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AccessLevel;

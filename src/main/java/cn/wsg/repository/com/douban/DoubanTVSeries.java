@@ -1,6 +1,6 @@
 package cn.wsg.repository.com.douban;
 
-import cn.wsg.commons.internet.org.schema.item.TVSeries;
+import cn.wsg.commons.data.schema.item.TVSeries;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AccessLevel;
 import lombok.Getter;

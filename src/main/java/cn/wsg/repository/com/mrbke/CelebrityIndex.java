@@ -1,6 +1,6 @@
 package cn.wsg.repository.com.mrbke;
 
-import cn.wsg.commons.internet.org.schema.item.Person;
+import cn.wsg.commons.data.schema.item.Person;
 import cn.wsg.commons.util.AssertUtils;
 import lombok.Getter;
 import lombok.ToString;

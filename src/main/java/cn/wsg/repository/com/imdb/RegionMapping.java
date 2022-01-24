@@ -1,6 +1,6 @@
 package cn.wsg.repository.com.imdb;
 
-import cn.wsg.commons.Region;
+import cn.wsg.commons.data.common.Region;
 
 import java.util.function.Supplier;
 

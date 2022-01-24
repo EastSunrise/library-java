@@ -1,11 +1,11 @@
 package cn.wsg.repository.com.imdb;
 
-import cn.wsg.commons.Language;
-import cn.wsg.commons.Region;
+import cn.wsg.commons.data.common.Language;
+import cn.wsg.commons.data.common.Region;
+import cn.wsg.commons.data.common.video.MovieGenre;
+import cn.wsg.commons.data.common.video.ReleaseDate;
+import cn.wsg.commons.data.common.video.ReleaseInfo;
 import cn.wsg.commons.internet.BaseSiteClient;
-import cn.wsg.commons.internet.common.video.MovieGenre;
-import cn.wsg.commons.internet.common.video.ReleaseDate;
-import cn.wsg.commons.internet.common.video.ReleaseInfo;
 import cn.wsg.commons.internet.support.*;
 import cn.wsg.commons.internet.util.URIUtil;
 import cn.wsg.commons.jackson.EnumDeserializers;

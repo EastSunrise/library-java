@@ -1,9 +1,9 @@
 package cn.wsg.repository.com.omdbapi;
 
-import cn.wsg.commons.Language;
-import cn.wsg.commons.Region;
+import cn.wsg.commons.data.common.Language;
+import cn.wsg.commons.data.common.Region;
+import cn.wsg.commons.data.common.video.MovieGenre;
 import cn.wsg.commons.internet.BaseSiteClient;
-import cn.wsg.commons.internet.common.video.MovieGenre;
 import cn.wsg.commons.internet.page.Page;
 import cn.wsg.commons.internet.page.PageIndex;
 import cn.wsg.commons.internet.support.NotFoundException;

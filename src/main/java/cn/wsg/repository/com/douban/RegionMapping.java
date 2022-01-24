@@ -1,6 +1,6 @@
 package cn.wsg.repository.com.douban;
 
-import cn.wsg.commons.Region;
+import cn.wsg.commons.data.common.Region;
 import cn.wsg.commons.internet.util.EnumMapping;
 import cn.wsg.commons.util.EnumUtilExt;
 import org.apache.commons.lang3.ArrayUtils;

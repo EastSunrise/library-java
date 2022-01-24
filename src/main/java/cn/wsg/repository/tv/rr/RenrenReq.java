@@ -1,7 +1,7 @@
 package cn.wsg.repository.tv.rr;
 
-import cn.wsg.commons.Region;
-import cn.wsg.commons.internet.common.video.MovieGenre;
+import cn.wsg.commons.data.common.Region;
+import cn.wsg.commons.data.common.video.MovieGenre;
 import cn.wsg.commons.internet.page.PageRequest;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;

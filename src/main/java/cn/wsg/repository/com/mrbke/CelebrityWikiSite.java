@@ -1,16 +1,17 @@
 package cn.wsg.repository.com.mrbke;
 
 import cn.wsg.commons.DatetimeConsts;
+import cn.wsg.commons.data.MetadataParser;
+import cn.wsg.commons.data.common.BloodType;
+import cn.wsg.commons.data.common.Constellation;
+import cn.wsg.commons.data.common.Gender;
+import cn.wsg.commons.data.common.Zodiac;
+import cn.wsg.commons.data.intangible.Length;
+import cn.wsg.commons.data.intangible.LengthUnit;
+import cn.wsg.commons.data.intangible.Mass;
+import cn.wsg.commons.data.intangible.MassUnit;
 import cn.wsg.commons.function.TriFunction;
-import cn.wsg.commons.intangible.Length;
-import cn.wsg.commons.intangible.LengthUnit;
-import cn.wsg.commons.intangible.Mass;
-import cn.wsg.commons.intangible.MassUnit;
 import cn.wsg.commons.internet.BaseSiteClient;
-import cn.wsg.commons.internet.common.BloodType;
-import cn.wsg.commons.internet.common.Constellation;
-import cn.wsg.commons.internet.common.Gender;
-import cn.wsg.commons.internet.common.Zodiac;
 import cn.wsg.commons.internet.page.AmountCountablePage;
 import cn.wsg.commons.internet.page.Page;
 import cn.wsg.commons.internet.page.PageIndex;
@@ -23,7 +24,6 @@ import cn.wsg.commons.util.MapUtilsExt;
 import cn.wsg.commons.util.NetUtils;
 import cn.wsg.commons.util.RegExUtilsExt;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.http.HttpHost;
@@ -34,13 +34,10 @@ import org.jsoup.nodes.TextNode;
 import org.jsoup.select.Elements;
 
 import java.net.URL;
-import java.time.DateTimeException;
 import java.time.Duration;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.*;
-import java.util.function.BiPredicate;
-import java.util.function.Function;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
@@ -54,6 +51,7 @@ public final class CelebrityWikiSite extends BaseSiteClient implements Celebrity
 
     private static final String HOME_PAGE = "http://www.mrbke.com";
     private static final String NO_PERSON_IMG = "noperson.jpg";
+    private static final String SEPARATOR_CHARS = "、";
     private static final Set<Integer> EXCEPTS = Set.of(821, 1539, 1568, 1757, 4017);
 
     public CelebrityWikiSite() {
@@ -83,8 +81,8 @@ public final class CelebrityWikiSite extends BaseSiteClient implements Celebrity
         Document document = getDocument(httpGet("/%s/index%s.html", path, page));
 
         Element box = document.selectFirst(".personbox");
-        List<CelebrityIndex> indices =
-            box.select("ul a").stream().map(this::getCelebrityIndex).collect(Collectors.toList());
+        Elements a = box.select("ul a");
+        List<CelebrityIndex> indices = a.stream().map(this::getCelebrityIndex).collect(Collectors.toList());
         return Page.amountCountable(indices, pageIndex, 100, getTotalOr(box, indices.size()));
     }
 
@@ -144,18 +142,18 @@ public final class CelebrityWikiSite extends BaseSiteClient implements Celebrity
         SimpleCelebrity celebrity = initCelebrity(document, SimpleCelebrity::new);
 
         Elements ems = div.select(CssSelectors.TAG_EM);
-        Map<String, String> metadata = new HashMap<>(ems.size());
+        MetadataParser parser = MetadataParser.create(ems.size());
         for (Element em : ems) {
             String key = em.text().replace(" ", "");
             String value = ((TextNode)em.nextSibling()).text().substring(1);
-            MapUtilsExt.putIfAbsentOrElseThrow(metadata, key, value);
+            parser.put(key, value);
         }
-        String serialNum = getString(metadata, "番号");
-        String title = getString(metadata, "名称");
+        String serialNum = parser.getString("番号");
+        String title = parser.getString("名称");
         URL image = NetUtils.createURL(div.selectFirst(CssSelectors.TAG_IMG).attr(CssSelectors.ATTR_SRC));
-        List<String> actresses = getStringList(metadata, "演员");
+        List<String> actresses = parser.getSeparatedStrings(SEPARATOR_CHARS, "演员");
         AdultWork work = new AdultWork(celebrity, serialNum, title, image, actresses);
-        work.setMosaic(getValue(metadata, s -> {
+        work.setMosaic(parser.getValue(s -> {
             if ("有码".equals(s)) {
                 return true;
             }
@@ -164,20 +162,17 @@ public final class CelebrityWikiSite extends BaseSiteClient implements Celebrity
             }
             throw new IllegalArgumentException("Unknown mosaic: " + s);
         }, "是否有码"));
-        work.setDuration(getValue(metadata, s -> {
+        work.setDuration(parser.getValue(s -> {
             Matcher matcher = RegExUtilsExt.matchesOrElseThrow(Lazy.DURATION_REGEX, s);
             return Duration.ofMinutes(Integer.parseInt(matcher.group("d")));
         }, "播放时间"));
-        work.setDatePublished(getValue(metadata, LocalDate::parse, "发行时间"));
-        work.setDirector(getString(metadata, "导演"));
-        work.setProducer(getString(metadata, "制作商"));
-        work.setPublisher(getString(metadata, "发行商"));
-        work.setSeries(getString(metadata, "系列"));
-        work.setTags(getStringList(metadata, "类别"));
-        metadata.remove("整理");
-        if (!metadata.isEmpty()) {
-            log.error("Unhandled information of {}: {}", serialNum, metadata.keySet());
-        }
+        work.setDatePublished(parser.getValue(LocalDate::parse, "发行时间"));
+        work.setDirector(parser.getString("导演"));
+        work.setProducer(parser.getString("制作商"));
+        work.setPublisher(parser.getString("发行商"));
+        work.setSeries(parser.getString("系列"));
+        work.setTags(parser.getSeparatedStrings("类别"));
+        parser.check("整理");
         return work;
     }
 
@@ -282,25 +277,25 @@ public final class CelebrityWikiSite extends BaseSiteClient implements Celebrity
 
     private CelebrityInfo getBasicInfo(Document document) {
         Elements ems = document.select(".datacon em");
-        Map<String, String> metadata = new HashMap<>(ems.size());
+        MetadataParser parser = MetadataParser.create(ems.size());
         for (Element em : ems) {
             String value = ((TextNode)em.nextSibling()).text().substring(1).strip();
             if (StringUtils.isBlank(value) || "暂无".equals(value)) {
                 continue;
             }
             String key = em.text().replace(" ", "");
-            metadata.merge(key, value, (a, b) -> Objects.equals(a, b) ? a : a + "、" + b);
+            parser.put(key, value);
         }
         CelebrityInfo info = new CelebrityInfo();
-        info.setGender(getEnum(metadata, "性别", Gender.class, (s, e) -> Objects.equals(s, e.getDisplayName())));
-        info.setFullName(getString(metadata, "姓名"));
-        info.setZhNames(getStringList(metadata, "中文名"));
-        info.setJaNames(getStringList(metadata, "日文名"));
-        info.setEnNames(getStringList(metadata, "英文名"));
+        info.setGender(parser.getEnum(Gender.class, (s, e) -> Objects.equals(s, e.getDisplayName()), "性别"));
+        info.setFullName(parser.getString("姓名"));
+        info.setZhNames(parser.getSeparatedStrings(SEPARATOR_CHARS, "中文名"));
+        info.setJaNames(parser.getSeparatedStrings(SEPARATOR_CHARS, "日文名"));
+        info.setEnNames(parser.getSeparatedStrings(SEPARATOR_CHARS, "英文名"));
         Set<String> aka = new HashSet<>();
-        Optional.ofNullable(getStringList(metadata, "别名")).ifPresent(aka::addAll);
-        Optional.ofNullable(getStringList(metadata, "外文名")).ifPresent(aka::addAll);
-        Optional.ofNullable(getStringList(metadata, "艺名")).ifPresent(aka::addAll);
+        Optional.ofNullable(parser.getSeparatedStrings(SEPARATOR_CHARS, "别名")).ifPresent(aka::addAll);
+        Optional.ofNullable(parser.getSeparatedStrings(SEPARATOR_CHARS, "外文名")).ifPresent(aka::addAll);
+        Optional.ofNullable(parser.getSeparatedStrings(SEPARATOR_CHARS, "艺名")).ifPresent(aka::addAll);
         Stream<String> stream = aka.stream().distinct().filter(s -> !Objects.equals(s, info.getFullName()));
         if (info.getZhNames() != null) {
             stream = stream.filter(s -> !info.getZhNames().contains(s));
@@ -313,80 +308,42 @@ public final class CelebrityWikiSite extends BaseSiteClient implements Celebrity
         }
         info.setAka(stream.collect(Collectors.toList()));
 
-        info.setZodiac(getEnum(metadata, "生肖", Zodiac.class, (s, e) -> Objects.equals(s, e.getZhName())));
-        info.setConstellation(getValue(metadata, key -> Objects.requireNonNullElseGet(Lazy.CONSTELLATION_ALIAS.get(key),
+        info.setZodiac(parser.getEnum(Zodiac.class, (s, e) -> Objects.equals(s, e.getZhName()), "生肖"));
+        info.setConstellation(parser.getValue(key -> Objects.requireNonNullElseGet(Lazy.CONSTELLATION_ALIAS.get(key),
             () -> EnumUtilExt.valueOf(Constellation.class, key,
                 (s, e) -> Objects.equals(s, e.getZhName()) || Objects.equals(s, e.getJaName()) || (e.getAlias() != null
                     && ArrayUtils.contains(e.getAlias(), s)))), "星座"));
-        info.setInterests(getStringList(metadata, "兴趣", "爱好", "兴趣爱好"));
-        info.setHeight(getValue(metadata, s -> {
+        info.setInterests(parser.getSeparatedStrings(SEPARATOR_CHARS, "兴趣", "爱好", "兴趣爱好"));
+        info.setHeight(parser.getValue(s -> {
             Matcher matcher = RegExUtilsExt.findOrElseThrow(Lazy.HEIGHT_REGEX, s);
             return new Length(Double.parseDouble(matcher.group("h")), LengthUnit.CENTIMETER);
         }, "身高"));
-        info.setWeight(getValue(metadata, s -> {
+        info.setWeight(parser.getValue(s -> {
             Matcher matcher = RegExUtilsExt.findOrElseThrow(Lazy.WEIGHT_REGEX, s);
             return new Mass(Double.parseDouble(matcher.group("w")), MassUnit.KILOGRAM);
         }, "体重"));
-        info.setFigure(getString(metadata, "三围"));
-        info.setCup(getString(metadata, "罩杯"));
-        info.setBloodType(getValue(metadata, s -> {
+        info.setFigure(parser.getString("三围"));
+        info.setCup(parser.getString("罩杯"));
+        info.setBloodType(parser.getValue(s -> {
             if ("0型".equals(s)) {
                 return BloodType.O;
             }
             Matcher matcher = RegExUtilsExt.matchesOrElseThrow(Lazy.BLOOD_TYPE_REGEX, s);
             return Enum.valueOf(BloodType.class, matcher.group("t").toUpperCase());
         }, "血型"));
-        info.setBirthday(getString(metadata, "出生日期", "生日", "出生时间"));
-        info.setOccupations(getStringList(metadata, "职业"));
-        info.setCountry(getString(metadata, "国籍", "地区"));
-        info.setLanguage(getString(metadata, "语言"));
-        info.setAgency(getString(metadata, "经纪公司"));
-        info.setStartDate(getString(metadata, "出道时间"));
-        info.setRetireDate(getString(metadata, "隐退时间"));
-        info.setFirm(getString(metadata, "事务所"));
-        info.setSchool(getString(metadata, "毕业院校"));
-        info.setBirthplace(getString(metadata, "出生地"));
-        info.setEthnicity(getString(metadata, "民族"));
-        if (!metadata.isEmpty()) {
-            info.setOthers(new HashMap<>(metadata));
-        }
+        info.setBirthday(parser.getString("出生日期", "生日", "出生时间"));
+        info.setOccupations(parser.getSeparatedStrings(SEPARATOR_CHARS, "职业"));
+        info.setCountry(parser.getString("国籍", "地区"));
+        info.setLanguage(parser.getString("语言"));
+        info.setAgency(parser.getString("经纪公司"));
+        info.setStartDate(parser.getString("出道时间"));
+        info.setRetireDate(parser.getString("隐退时间"));
+        info.setFirm(parser.getString("事务所"));
+        info.setSchool(parser.getString("毕业院校"));
+        info.setBirthplace(parser.getString("出生地"));
+        info.setEthnicity(parser.getString("民族"));
+        parser.check();
         return info;
-    }
-
-    private List<String> getStringList(Map<String, String> map, String... keys) {
-        return getValues(map, Function.identity(), keys);
-    }
-
-    private <T> List<T> getValues(Map<String, String> map, Function<? super String, ? extends T> func, String... keys) {
-        return getValue(map, s -> {
-            List<T> list = new ArrayList<>(1);
-            for (String part : StringUtils.split(s, '、')) {
-                CollectionUtils.addIgnoreNull(list, func.apply(part));
-            }
-            return list;
-        }, keys);
-    }
-
-    private String getString(Map<String, String> map, String... keys) {
-        return getValue(map, Function.identity(), keys);
-    }
-
-    private <E extends Enum<E>> E getEnum(Map<String, String> map, String key, Class<E> c, BiPredicate<String, E> p) {
-        return getValue(map, s -> EnumUtilExt.valueOf(c, s, p), key);
-    }
-
-    private <T> T getValue(Map<String, String> map, Function<? super String, T> func, String... keys) {
-        for (String key : keys) {
-            String value = map.remove(key);
-            if (StringUtils.isNotBlank(value)) {
-                try {
-                    return func.apply(value);
-                } catch (IllegalArgumentException | DateTimeException e) {
-                    log.error("{}: {}", key, e.getMessage());
-                }
-            }
-        }
-        return null;
     }
 
     private List<String> getExtStringList(Map<String, Element> extInfo, String... keys) {

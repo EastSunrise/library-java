@@ -1,6 +1,6 @@
 package cn.wsg.repository.com.mrbke;
 
-import cn.wsg.commons.internet.org.schema.item.CreativeWork;
+import cn.wsg.commons.data.schema.item.CreativeWork;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.Setter;

@@ -1,6 +1,6 @@
 package cn.wsg.repository.com.omdbapi;
 
-import cn.wsg.commons.internet.org.schema.item.TVEpisode;
+import cn.wsg.commons.data.schema.item.TVEpisode;
 
 import java.time.LocalDate;
 

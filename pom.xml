@@ -27,6 +27,11 @@
             <artifactId>commons-internet</artifactId>
             <version>${wsg.commons.version}</version>
         </dependency>
+        <dependency>
+            <groupId>cn.wsg.commons</groupId>
+            <artifactId>commons-data</artifactId>
+            <version>${wsg.commons.version}</version>
+        </dependency>
 
         <dependency>
             <groupId>cn.wsg.commons</groupId>
