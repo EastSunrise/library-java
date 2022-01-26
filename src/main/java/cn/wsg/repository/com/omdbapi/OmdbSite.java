@@ -1,7 +1,7 @@
 package cn.wsg.repository.com.omdbapi;
 
+import cn.wsg.commons.data.common.Country;
 import cn.wsg.commons.data.common.Language;
-import cn.wsg.commons.data.common.Region;
 import cn.wsg.commons.data.common.video.MovieGenre;
 import cn.wsg.commons.internet.BaseSiteClient;
 import cn.wsg.commons.internet.page.Page;
@@ -149,14 +149,14 @@ public final class OmdbSite extends BaseSiteClient implements OmdbApi {
                     EnumDeserializers.match(MovieGenre.class, (s, e) -> Objects.equals(s, e.getEnTitle())))
                     .addDeserializer(Language.class,
                         EnumDeserializers.match(Language.class, (s, e) -> ArrayUtils.contains(e.getEnNames(), s)))
-                    .addDeserializer(Region.class, new FromStringDeserializer<>(Region.class) {
+                    .addDeserializer(Country.class, new FromStringDeserializer<>(Country.class) {
                         @Override
-                        protected Region _deserialize(String value, DeserializationContext ctxt) {
+                        protected Country _deserialize(String value, DeserializationContext ctxt) {
                             try {
-                                return EnumUtilExt.valueOf(RegionMapping.class, value, (s, e) -> e.match(s)).getEnum();
+                                return EnumUtilExt.valueOf(CountryMapping.class, value, (s, e) -> e.match(s)).getEnum();
                             } catch (Exception ex) {
                                 return EnumUtilExt
-                                    .valueOf(Region.class, value, (s, e) -> Objects.equals(s, e.getEnShortName()));
+                                    .valueOf(Country.class, value, (s, e) -> Objects.equals(s, e.getEnShortName()));
                             }
                         }
                     }).addDeserializer(OmdbVideo.RatingSource.class,

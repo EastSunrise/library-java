@@ -1,6 +1,6 @@
 package cn.wsg.repository.tv.rr;
 
-import cn.wsg.commons.data.common.Region;
+import cn.wsg.commons.data.common.Country;
 import cn.wsg.commons.data.common.video.MovieGenre;
 import cn.wsg.commons.internet.page.PageRequest;
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -28,7 +28,7 @@ public class RenrenReq extends PageRequest implements Serializable {
     private static final int DEFAULT_PAGE_SIZE = 10;
 
     private VideoType type;
-    private Region area;
+    private Country area;
     private MovieGenre genre;
     private SerializedStatus status;
     private Sort sort;
@@ -37,7 +37,7 @@ public class RenrenReq extends PageRequest implements Serializable {
         super(current, DEFAULT_PAGE_SIZE);
     }
 
-    public RenrenReq(int current, VideoType type, Region area, MovieGenre genre, SerializedStatus status, Sort sort) {
+    public RenrenReq(int current, VideoType type, Country area, MovieGenre genre, SerializedStatus status, Sort sort) {
         super(current, DEFAULT_PAGE_SIZE);
         this.type = type;
         this.area = area;
@@ -109,8 +109,8 @@ public class RenrenReq extends PageRequest implements Serializable {
     }
 
     private static class Mapping {
-        private static final Map<Region, String> REGION_ALIAS =
-            Map.of(Region.CN, "内地", Region.HK, "中国香港", Region.TW, "中国台湾");
+        private static final Map<Country, String> REGION_ALIAS =
+            Map.of(Country.CN, "内地", Country.HK, "中国香港", Country.TW, "中国台湾");
     }
 
     public enum Sort {

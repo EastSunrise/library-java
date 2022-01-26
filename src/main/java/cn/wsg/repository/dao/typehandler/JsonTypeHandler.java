@@ -1,7 +1,7 @@
 package cn.wsg.repository.dao.typehandler;
 
+import cn.wsg.commons.data.common.Country;
 import cn.wsg.commons.data.common.Language;
-import cn.wsg.commons.data.common.Region;
 import cn.wsg.commons.data.common.video.MovieGenre;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -23,7 +23,7 @@ import java.util.Objects;
  * @author Kingen
  */
 @MappedJdbcTypes(value = JdbcType.VARCHAR)
-@MappedTypes(value = {String[].class, MovieGenre[].class, Region[].class, Language[].class, int[].class})
+@MappedTypes(value = {String[].class, MovieGenre[].class, Country[].class, Language[].class, int[].class})
 public class JsonTypeHandler<T> extends BaseTypeHandler<T> {
 
     private static final ObjectMapper MAPPER = new ObjectMapper().enable(SerializationFeature.WRITE_ENUMS_USING_INDEX);

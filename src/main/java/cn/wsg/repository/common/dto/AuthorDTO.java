@@ -1,6 +1,6 @@
 package cn.wsg.repository.common.dto;
 
-import cn.wsg.commons.data.common.Region;
+import cn.wsg.commons.data.common.Country;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -19,7 +19,7 @@ public class AuthorDTO {
 
     private String originalName;
 
-    private Region region;
+    private Country country;
 
     private String link;
 }

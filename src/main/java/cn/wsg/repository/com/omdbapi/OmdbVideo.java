@@ -1,7 +1,7 @@
 package cn.wsg.repository.com.omdbapi;
 
+import cn.wsg.commons.data.common.Country;
 import cn.wsg.commons.data.common.Language;
-import cn.wsg.commons.data.common.Region;
 import cn.wsg.commons.data.common.video.MovieGenre;
 import cn.wsg.commons.data.schema.item.CreativeWork;
 import cn.wsg.commons.jackson.JsonJoinedValue;
@@ -73,7 +73,7 @@ public abstract class OmdbVideo extends OmdbResponse implements CreativeWork {
     private List<Language> languages;
 
     @JsonProperty("Country")
-    private Region regions;
+    private Country country;
 
     @JsonProperty("Awards")
     private String awards;

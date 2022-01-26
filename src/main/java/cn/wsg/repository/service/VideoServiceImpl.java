@@ -1,7 +1,7 @@
 package cn.wsg.repository.service;
 
+import cn.wsg.commons.data.common.Country;
 import cn.wsg.commons.data.common.Language;
-import cn.wsg.commons.data.common.Region;
 import cn.wsg.commons.data.common.video.MovieGenre;
 import cn.wsg.commons.internet.support.LoginException;
 import cn.wsg.commons.internet.support.NotFoundException;
@@ -181,7 +181,7 @@ public class VideoServiceImpl implements VideoService {
             season.setGenres(doubanSeries.getGenres().toArray(new MovieGenre[0]));
         }
         if (doubanSeries.getCountriesOfOrigin() != null) {
-            season.setRegions(doubanSeries.getCountriesOfOrigin().toArray(new Region[0]));
+            season.setCountries(doubanSeries.getCountriesOfOrigin().toArray(new Country[0]));
         }
         if (doubanSeries.getLanguages() != null) {
             season.setLanguages(doubanSeries.getLanguages().toArray(new Language[0]));
@@ -203,7 +203,7 @@ public class VideoServiceImpl implements VideoService {
         movie.setOriginalTitle(doubanMovie.getOriginalTitle());
         movie.setEnTitle(imdbMovie.getName());
         movie.setGenres(imdbMovie.getGenres().toArray(new MovieGenre[0]));
-        movie.setRegions(imdbMovie.getCountriesOfOrigin().toArray(new Region[0]));
+        movie.setCountries(imdbMovie.getCountriesOfOrigin().toArray(new Country[0]));
         movie.setLanguages(checkDataIntegrity(imdbMovie.getLanguages(), "languages").toArray(new Language[0]));
         movie.setReleaseDate(Optional.ofNullable(imdbMovie.getDatePublished()).orElse(doubanMovie.getDatePublished()));
         movie.setDescription(doubanMovie.getDescription());

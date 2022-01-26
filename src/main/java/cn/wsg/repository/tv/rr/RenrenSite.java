@@ -1,13 +1,13 @@
 package cn.wsg.repository.tv.rr;
 
-import cn.wsg.commons.data.common.Region;
+import cn.wsg.commons.data.common.Country;
 import cn.wsg.commons.data.common.video.MovieGenre;
 import cn.wsg.commons.internet.BaseSiteClient;
 import cn.wsg.commons.internet.support.NotFoundException;
 import cn.wsg.commons.internet.support.UnexpectedException;
 import cn.wsg.commons.jackson.EnumDeserializers;
 import cn.wsg.commons.util.AssertUtils;
-import cn.wsg.repository.com.douban.RegionMapping;
+import cn.wsg.repository.com.douban.CountryMapping;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
@@ -79,10 +79,10 @@ public class RenrenSite extends BaseSiteClient implements RenrenTube {
             new ObjectMapper().enable(DeserializationFeature.ACCEPT_EMPTY_STRING_AS_NULL_OBJECT).registerModule(
                 new SimpleModule().addDeserializer(MovieGenre.class,
                     EnumDeserializers.match(MovieGenre.class, (s, e) -> Objects.equals(s, e.getZhTitle())))
-                    .addDeserializer(Region.class, new FromStringDeserializer<>(Region.class) {
+                    .addDeserializer(Country.class, new FromStringDeserializer<>(Country.class) {
                         @Override
-                        protected Region _deserialize(String value, DeserializationContext ctxt) {
-                            return RegionMapping.of(value);
+                        protected Country _deserialize(String value, DeserializationContext ctxt) {
+                            return CountryMapping.of(value);
                         }
                     }));
     }

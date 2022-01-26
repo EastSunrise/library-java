@@ -213,7 +213,7 @@ public class DoubanRepositoryImpl extends AbstractLoggableSiteClient<Long> imple
             if (video.getCountriesOfOrigin() == null && null != roo) {
                 String[] values = StringUtils.split(((TextNode)roo.nextSibling()).text(), "/");
                 video.setCountriesOfOrigin(
-                    Arrays.stream(values).map(s -> RegionMapping.of(s.strip())).collect(Collectors.toList()));
+                    Arrays.stream(values).map(s -> CountryMapping.of(s.strip())).collect(Collectors.toList()));
             }
             Element lang = metadata.get("语言:");
             if (video.getLanguages() == null && null != lang) {

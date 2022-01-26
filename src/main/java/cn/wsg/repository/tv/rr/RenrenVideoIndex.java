@@ -1,6 +1,6 @@
 package cn.wsg.repository.tv.rr;
 
-import cn.wsg.commons.data.common.Region;
+import cn.wsg.commons.data.common.Country;
 import cn.wsg.commons.data.common.video.MovieGenre;
 import cn.wsg.commons.data.schema.item.CreativeWork;
 import cn.wsg.commons.jackson.JsonJoinedValue;
@@ -48,7 +48,7 @@ public class RenrenVideoIndex implements CreativeWork {
     private List<MovieGenre> genre;
 
     @JsonProperty("area")
-    private Region area;
+    private Country area;
 
     @JsonProperty("score")
     private Double score;

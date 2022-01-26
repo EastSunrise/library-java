@@ -1,7 +1,7 @@
 package cn.wsg.repository.com.imdb;
 
+import cn.wsg.commons.data.common.Country;
 import cn.wsg.commons.data.common.Language;
-import cn.wsg.commons.data.common.Region;
 import cn.wsg.commons.data.common.video.MovieGenre;
 import cn.wsg.commons.data.common.video.ReleaseDate;
 import cn.wsg.commons.data.common.video.ReleaseInfo;
@@ -93,7 +93,7 @@ public class ImdbRepositoryImpl extends BaseSiteClient implements ImdbRepository
         Elements releases = document.selectFirst("#releases").nextElementSibling().select(CssSelectors.TAG_TR);
         List<ReleaseDate> releaseDates = new ArrayList<>(releases.size());
         for (Element release : releases) {
-            Region country =
+            Country country =
                 parseCountry(URIUtil.getQueryValue(release.child(0).child(0).attr(CssSelectors.ATTR_HREF), "region"));
             String attribute = release.child(2).hasText() ? StringUtils.strip(release.child(2).text(), "()") : null;
             releaseDates.add(ReleaseDate.parse(country, release.child(1).text(), Lazy.DTF_RELEASE, attribute));
@@ -156,12 +156,12 @@ public class ImdbRepositoryImpl extends BaseSiteClient implements ImdbRepository
         return ids;
     }
 
-    private Region parseCountry(String value) {
+    private Country parseCountry(String value) {
         value = value.toUpperCase();
         try {
-            return Region.valueOf(value);
+            return Country.valueOf(value);
         } catch (IllegalArgumentException e) {
-            return RegionMapping.valueOf(value).get();
+            return CountryMapping.valueOf(value).get();
         }
     }
 

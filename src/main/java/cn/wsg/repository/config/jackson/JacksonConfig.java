@@ -1,8 +1,8 @@
 package cn.wsg.repository.config.jackson;
 
 import cn.wsg.commons.DatetimeConsts;
+import cn.wsg.commons.data.common.Country;
 import cn.wsg.commons.data.common.Language;
-import cn.wsg.commons.data.common.Region;
 import cn.wsg.commons.data.common.video.MovieGenre;
 import cn.wsg.commons.jackson.EnumDeserializers;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -33,7 +33,7 @@ public class JacksonConfig {
                 .addSerializer(new LocalDateTimeSerializer(DatetimeConsts.DTF_YYYY_MM_DD_HH_MM_SS))).registerModule(
             new SimpleModule().addDeserializer(MovieGenre.class,
                 EnumDeserializers.match(MovieGenre.class, (s, e) -> Objects.equals(s, e.getZhTitle())))
-                .addDeserializer(Region.class, new RegionDeserializer())
+                .addDeserializer(Country.class, new CountryDeserializer())
                 .addDeserializer(Language.class, new LanguageDeserializer()));
     }
 }

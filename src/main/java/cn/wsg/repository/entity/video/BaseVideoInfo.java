@@ -1,7 +1,7 @@
 package cn.wsg.repository.entity.video;
 
+import cn.wsg.commons.data.common.Country;
 import cn.wsg.commons.data.common.Language;
-import cn.wsg.commons.data.common.Region;
 import cn.wsg.commons.data.common.video.MovieGenre;
 import lombok.Getter;
 import lombok.Setter;
@@ -25,7 +25,7 @@ class BaseVideoInfo {
 
     private MovieGenre[] genres;
 
-    private Region[] regions;
+    private Country[] countries;
 
     private Language[] languages;
 

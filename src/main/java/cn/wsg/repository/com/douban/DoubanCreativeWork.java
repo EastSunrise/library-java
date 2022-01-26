@@ -1,7 +1,7 @@
 package cn.wsg.repository.com.douban;
 
+import cn.wsg.commons.data.common.Country;
 import cn.wsg.commons.data.common.Language;
-import cn.wsg.commons.data.common.Region;
 import cn.wsg.commons.data.common.video.AggregateRating;
 import cn.wsg.commons.data.common.video.MovieGenre;
 import cn.wsg.commons.data.schema.item.CreativeWork;
@@ -40,7 +40,7 @@ public abstract class DoubanCreativeWork extends DoubanThing implements Creative
 
     @Setter(AccessLevel.PACKAGE)
     @JsonProperty("countryOfOrigin")
-    private List<Region> countriesOfOrigin;
+    private List<Country> countriesOfOrigin;
 
     @Setter(AccessLevel.PACKAGE)
     @JsonProperty("inLanguage")

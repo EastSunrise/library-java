@@ -1,7 +1,7 @@
 package cn.wsg.repository.com.imdb;
 
+import cn.wsg.commons.data.common.Country;
 import cn.wsg.commons.data.common.Language;
-import cn.wsg.commons.data.common.Region;
 import cn.wsg.commons.data.common.video.AggregateRating;
 import cn.wsg.commons.data.common.video.MovieGenre;
 import cn.wsg.commons.data.schema.item.CreativeWork;
@@ -68,7 +68,7 @@ public class ImdbCreativeWork extends ImdbThing implements CreativeWork {
 
     @Setter(AccessLevel.PACKAGE)
     @JsonProperty("countryOfOrigin")
-    private List<Region> countriesOfOrigin;
+    private List<Country> countriesOfOrigin;
 
     @Setter(AccessLevel.PACKAGE)
     @JsonProperty("inLanguage")

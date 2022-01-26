@@ -1,6 +1,6 @@
 package cn.wsg.repository.tv.rr;
 
-import cn.wsg.commons.data.common.Region;
+import cn.wsg.commons.data.common.Country;
 import cn.wsg.commons.data.common.video.MovieGenre;
 import cn.wsg.commons.data.schema.item.CreativeWork;
 import cn.wsg.commons.jackson.JsonJoinedValue;
@@ -38,7 +38,7 @@ public class SearchedItem implements CreativeWork {
     private String description;
 
     @JsonProperty("area")
-    private Region region;
+    private Country country;
 
     @JsonProperty("year")
     private Integer year;

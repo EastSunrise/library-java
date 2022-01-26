@@ -1,6 +1,6 @@
 package cn.wsg.repository.entity.video;
 
-import cn.wsg.commons.data.common.Region;
+import cn.wsg.commons.data.common.Country;
 import cn.wsg.repository.common.enums.Gender;
 import lombok.Getter;
 import lombok.ToString;
@@ -36,7 +36,7 @@ public class CelebrityDO implements Serializable {
 
     private LocalDate birthday;
 
-    private Region region;
+    private Country country;
 
     @ToString.Exclude
     private LocalDateTime gmtModified;
